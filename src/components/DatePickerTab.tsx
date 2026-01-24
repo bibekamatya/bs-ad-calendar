@@ -1,5 +1,5 @@
 import React from 'react'
-import DatePicker from './DatePicker'
+import CalendarInput from './CalendarInput'
 import type { DateOutput } from '../types'
 
 interface DatePickerTabProps {
@@ -25,13 +25,13 @@ const DatePickerTab: React.FC<DatePickerTabProps> = ({
   onCopyCode,
   renderOutput
 }) => {
-  const adCode = `<DatePicker
+  const adCode = `<CalendarInput
   calendarType="AD"
   placeholder="Select AD date"
   onDateSelect={(data) => console.log(data)}
 />`
 
-  const bsCode = `<DatePicker
+  const bsCode = `<CalendarInput
   calendarType="BS"
   placeholder="Select BS date"
   onDateSelect={(data) => console.log(data)}
@@ -42,8 +42,8 @@ const DatePickerTab: React.FC<DatePickerTabProps> = ({
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
         {/* AD DatePicker */}
         <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'white' }}>
-          <h3 style={{ color: '#111827', marginTop: 0, marginBottom: '15px', fontSize: '18px' }}>AD DatePicker</h3>
-          <DatePicker
+          <h3 style={{ color: '#111827', marginTop: 0, marginBottom: '15px', fontSize: '18px' }}>AD CalendarInput</h3>
+          <CalendarInput
             calendarType="AD"
             placeholder="Select AD date"
             onDateSelect={onADSelect}
@@ -101,8 +101,8 @@ const DatePickerTab: React.FC<DatePickerTabProps> = ({
 
         {/* BS DatePicker */}
         <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'white' }}>
-          <h3 style={{ color: '#111827', marginTop: 0, marginBottom: '15px', fontSize: '18px' }}>BS DatePicker</h3>
-          <DatePicker
+          <h3 style={{ color: '#111827', marginTop: 0, marginBottom: '15px', fontSize: '18px' }}>BS CalendarInput</h3>
+          <CalendarInput
             calendarType="BS"
             placeholder="Select BS date"
             onDateSelect={onBSSelect}

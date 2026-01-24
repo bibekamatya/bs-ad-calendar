@@ -129,7 +129,7 @@ export const isDateInRange = (
   return dateTimestamp >= startTimestamp && dateTimestamp <= endTimestamp
 }
 
-export const parseDate = (dateStr: string, calendarType: 'BS' | 'AD'): DateInfo | null => {
+export const parseDate = (dateStr: string): DateInfo | null => {
   try {
     const [year, month, day] = dateStr.split('-').map(Number)
     if (!year || !month || !day) return null
@@ -143,14 +143,14 @@ export const isDateDisabled = (
   date: DateInfo,
   minDate?: string,
   maxDate?: string,
-  calendarType: 'BS' | 'AD' = 'AD'
+  _calendarType: 'BS' | 'AD' = 'AD'
 ): boolean => {
   if (!minDate && !maxDate) return false
   
   const dateTimestamp = new Date(date.year, date.month, date.day).getTime()
   
   if (minDate) {
-    const min = parseDate(minDate, calendarType)
+    const min = parseDate(minDate)
     if (min) {
       const minTimestamp = new Date(min.year, min.month, min.day).getTime()
       if (dateTimestamp < minTimestamp) return true
@@ -158,7 +158,7 @@ export const isDateDisabled = (
   }
   
   if (maxDate) {
-    const max = parseDate(maxDate, calendarType)
+    const max = parseDate(maxDate)
     if (max) {
       const maxTimestamp = new Date(max.year, max.month, max.day).getTime()
       if (dateTimestamp > maxTimestamp) return true

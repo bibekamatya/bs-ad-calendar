@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { CalendarProps } from '../../types/index.js'
+import type { CalendarProps, DateInfo } from '../../types/index.js'
 import { useCalendar } from '../../hooks/useCalendar'
 import { convertToNepaliNumber, createDateOutput, isDateDisabled } from '../../utils/dateUtils'
 import { createPredefinedRanges } from '../../utils/rangePresets'

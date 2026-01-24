@@ -3,12 +3,11 @@ import type { DateOutput, DateRange } from './types'
 import BasicTab from './components/BasicTab'
 import LocalizationTab from './components/LocalizationTab'
 import RangeTab from './components/RangeTab'
-import AdvancedTab from './components/AdvancedTab'
 import CustomizationTab from './components/CustomizationTab'
 import DatePickerTab from './components/DatePickerTab'
 import './App.css'
 
-type TabType = 'basic' | 'localization' | 'range' | 'advanced' | 'customization' | 'datepicker'
+type TabType = 'basic' | 'localization' | 'range' | 'customization' | 'datepicker'
 
 function App() {
   const [activeTab, setActiveTab] = useState<TabType>('basic')
@@ -42,8 +41,9 @@ function App() {
     borderBottom: activeTab === tab ? '2px solid #3b82f6' : '2px solid transparent',
     background: activeTab === tab ? '#eff6ff' : 'white',
     color: activeTab === tab ? '#3b82f6' : '#6b7280',
-    fontWeight: activeTab === tab ? '600' : '400',
-    transition: 'all 0.2s'
+    fontWeight: '500',
+    transition: 'all 0.2s',
+    outline: 'none'
   })
 
   const renderOutput = (output: string) => {
@@ -77,11 +77,10 @@ function App() {
 
       <div style={{ display: 'flex', gap: '0', marginBottom: '15px', background: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', justifyContent: 'center' }}>
         <button onClick={() => setActiveTab('basic')} style={tabStyle('basic')}>Basic</button>
-        <button onClick={() => setActiveTab('localization')} style={tabStyle('localization')}>Localization</button>
+        <button onClick={() => setActiveTab('datepicker')} style={tabStyle('datepicker')}>CalendarInput</button>
         <button onClick={() => setActiveTab('range')} style={tabStyle('range')}>Range Selection</button>
+        <button onClick={() => setActiveTab('localization')} style={tabStyle('localization')}>Localization</button>
         <button onClick={() => setActiveTab('customization')} style={tabStyle('customization')}>Customization</button>
-        <button onClick={() => setActiveTab('datepicker')} style={tabStyle('datepicker')}>DatePicker</button>
-        <button onClick={() => setActiveTab('advanced')} style={tabStyle('advanced')}>Advanced</button>
       </div>
 
       {activeTab === 'basic' && (
@@ -123,20 +122,6 @@ function App() {
           onToggleCode={toggleCode}
           onCopyCode={copyCode}
           renderRangeOutput={renderRangeOutput}
-        />
-      )}
-
-      {activeTab === 'advanced' && (
-        <AdvancedTab
-          outputAD={outputs.ad4 || ''}
-          outputBS={outputs.bs4 || ''}
-          onADSelect={(data) => handleOutput('ad4', data)}
-          onBSSelect={(data) => handleOutput('bs4', data)}
-          showCode={showCode}
-          copied={copied}
-          onToggleCode={toggleCode}
-          onCopyCode={copyCode}
-          renderOutput={renderOutput}
         />
       )}
 

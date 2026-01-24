@@ -1,6 +1,9 @@
 // Main component
 export { default as Calendar } from './components/Calendar'
-export { default as DatePicker } from './components/DatePicker'
+export { default as CalendarInput } from './components/CalendarInput'
+
+// Legacy export for backward compatibility
+export { default as DatePicker } from './components/CalendarInput'
 
 // Types
 export type {

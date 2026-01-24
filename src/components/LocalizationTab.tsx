@@ -27,7 +27,7 @@ const LocalizationTab: React.FC<LocalizationTabProps> = ({
   renderOutput
 }) => {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 320px))', gap: '15px', justifyContent: 'center' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))', gap: '20px', justifyContent: 'center', maxWidth: '1400px', margin: '0 auto' }}>
       <ExampleCard
         title="AD - Nepali Numbers"
         code={`<Calendar
