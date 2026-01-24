@@ -1,0 +1,79 @@
+export type DateInfo = {
+  year: number
+  month: number
+  day: number
+}
+
+export type DateRange = {
+  start: DateInfo | null
+  end: DateInfo | null
+}
+
+export type DateOutput = {
+  bs: string
+  ad: string
+  formatted: {
+    bs: string
+    ad: string
+  }
+}
+
+export type PredefinedRange = {
+  label: string
+  getValue: (calendarType: 'BS' | 'AD') => DateRange
+  key: string
+}
+
+export type CalendarProps = {
+  calendarType?: 'BS' | 'AD'
+  value?: string
+  onChange?: (date: string) => void
+  mode?: 'single' | 'range'
+  outputFormat?: 'iso' | 'object' | 'both'
+  onDateSelect?: (data: DateOutput) => void
+  onRangeSelect?: (range: { start: DateInfo, end: DateInfo }) => void
+  showRangePresets?: boolean
+  predefinedRanges?: PredefinedRange[]
+  onPresetSelect?: (preset: PredefinedRange, range: DateRange) => void
+  showNepaliMonths?: boolean
+  showNepaliDays?: boolean
+  showNepaliNumbers?: boolean
+  className?: string
+  showToday?: boolean
+  disabled?: boolean
+  minDate?: string
+  maxDate?: string
+  theme?: 'light' | 'dark' | 'custom'
+  colors?: {
+    primary?: string
+    background?: string
+    text?: string
+    border?: string
+    hover?: string
+    selected?: string
+    today?: string
+    disabled?: string
+  }
+}
+
+export type CalendarHeaderProps = {
+  currentMonth: number
+  currentYear: number
+  months: string[]
+  onNavigateMonth: (direction: number) => void
+  disabled?: boolean
+  showNepaliNumbers?: boolean
+  convertToNepaliNumber: (num: number) => string
+}
+
+export type CalendarGridProps = {
+  calendarDays: (number | null)[]
+  days: string[]
+  onDateSelect: (day: number) => void
+  isSelected: (day: number) => boolean
+  isInRange: (day: number) => boolean
+  isToday: (day: number) => boolean
+  disabled?: boolean
+  showNepaliNumbers?: boolean
+  convertToNepaliNumber: (num: number) => string
+}
