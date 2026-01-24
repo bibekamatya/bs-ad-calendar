@@ -143,6 +143,34 @@ const Calendar: React.FC<CalendarProps> = ({
     }
   }
 
+  const handleKeyDown = (event: React.KeyboardEvent) => {
+    if (disabled) return
+
+    switch (event.key) {
+      case 'ArrowLeft':
+        navigateMonth(-1)
+        break
+      case 'ArrowRight':
+        navigateMonth(1)
+        break
+      case 'ArrowUp':
+        navigateMonth(-12)
+        break
+      case 'ArrowDown':
+        navigateMonth(12)
+        break
+      case 'PageUp':
+        event.shiftKey ? navigateMonth(-12) : navigateMonth(-1)
+        break
+      case 'PageDown':
+        event.shiftKey ? navigateMonth(12) : navigateMonth(1)
+        break
+      default:
+        return
+    }
+    event.preventDefault()
+  }
+
   // Generate CSS variables for theming
   const cssVariables = colors ? Object.entries(colors).reduce((acc, [key, value]) => {
     acc[`--calendar-${key}`] = value
@@ -158,6 +186,10 @@ const Calendar: React.FC<CalendarProps> = ({
       className={`${styles.calendar} ${className}`}
       style={calendarStyle}
       data-theme={theme}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="application"
+      aria-label="Calendar"
     >
       {mode === 'range' && renderPresets && (
         <div style={{ display: 'flex', gap: '16px' }}>

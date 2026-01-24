@@ -1,73 +1,265 @@
-# React + TypeScript + Vite
+# BS-AD Calendar
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, feature-rich React calendar component supporting both **Bikram Sambat (BS)** and **Gregorian (AD)** calendars with full TypeScript support.
 
-Currently, two official plugins are available:
+[![npm version](https://img.shields.io/npm/v/bs-ad-calendar.svg)](https://www.npmjs.com/package/bs-ad-calendar)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## React Compiler
+✨ **Dual Calendar Support** - Switch between BS (Nepali) and AD (Gregorian) calendars  
+🎨 **Customizable Themes** - Light/dark themes with custom color support  
+📅 **Date & Range Selection** - Single date or date range selection modes  
+🌏 **Localization** - Nepali months, days, and number support  
+⌨️ **Keyboard Navigation** - Full keyboard accessibility  
+📱 **Responsive Design** - Works on all screen sizes  
+🎯 **DatePicker Component** - Input field with popup calendar  
+🔧 **TypeScript** - Full type definitions included  
+♿ **Accessible** - ARIA labels and keyboard navigation
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Installation
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install bs-ad-calendar
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+yarn add bs-ad-calendar
 ```
+
+```bash
+pnpm add bs-ad-calendar
+```
+
+## Quick Start
+
+### Basic Calendar
+
+```tsx
+import { Calendar } from 'bs-ad-calendar'
+
+function App() {
+  return (
+    <Calendar
+      calendarType="BS"
+      onDateSelect={(date) => console.log(date)}
+    />
+  )
+}
+```
+
+### DatePicker with Input
+
+```tsx
+import { DatePicker } from 'bs-ad-calendar'
+
+function App() {
+  return (
+    <DatePicker
+      calendarType="AD"
+      placeholder="Select a date"
+      onDateSelect={(date) => console.log(date)}
+    />
+  )
+}
+```
+
+### Range Selection
+
+```tsx
+import { Calendar } from 'bs-ad-calendar'
+
+function App() {
+  return (
+    <Calendar
+      calendarType="BS"
+      mode="range"
+      showRangePresets
+      onRangeSelect={(range) => console.log(range)}
+    />
+  )
+}
+```
+
+## API Reference
+
+### Calendar Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `calendarType` | `'BS' \| 'AD'` | `'AD'` | Calendar type |
+| `mode` | `'single' \| 'range'` | `'single'` | Selection mode |
+| `onDateSelect` | `(date: DateOutput) => void` | - | Single date selection callback |
+| `onRangeSelect` | `(range: DateRange) => void` | - | Range selection callback |
+| `showToday` | `boolean` | `true` | Highlight today's date |
+| `disabled` | `boolean` | `false` | Disable calendar interaction |
+| `minDate` | `string` | - | Minimum selectable date (ISO format) |
+| `maxDate` | `string` | - | Maximum selectable date (ISO format) |
+| `theme` | `'light' \| 'dark' \| 'custom'` | `'light'` | Theme variant |
+| `colors` | `ColorConfig` | - | Custom color configuration |
+| `showNepaliMonths` | `boolean` | `false` | Show Nepali month names |
+| `showNepaliDays` | `boolean` | `false` | Show Nepali day names |
+| `showNepaliNumbers` | `boolean` | `false` | Show Nepali numerals |
+| `showRangePresets` | `boolean` | `false` | Show range preset buttons |
+| `rangePresetsPosition` | `'top' \| 'left'` | `'top'` | Position of range presets |
+| `className` | `string` | - | Additional CSS class |
+
+### DatePicker Props
+
+Extends all Calendar props plus:
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `placeholder` | `string` | `'Select date'` | Input placeholder text |
+| `inputClassName` | `string` | - | Input container CSS class |
+| `popupClassName` | `string` | - | Popup calendar CSS class |
+
+### Color Configuration
+
+```tsx
+colors={{
+  primary: '#3b82f6',      // Primary accent color
+  selected: '#3b82f6',     // Selected date background
+  today: '#dbeafe',        // Today's date background
+  hover: '#eff6ff',        // Hover state background
+  background: '#ffffff',   // Calendar background
+  text: '#1f2937',        // Text color
+  border: '#e5e7eb',      // Border color
+  disabled: '#d1d5db'     // Disabled date color
+}}
+```
+
+### Date Output Format
+
+```tsx
+{
+  bs: "2081-09-15",           // BS date (ISO format)
+  ad: "2024-12-31",           // AD date (ISO format)
+  formatted: {
+    bs: "Poush 15, 2081",     // Formatted BS date
+    ad: "December 31, 2024"   // Formatted AD date
+  }
+}
+```
+
+### Range Output Format
+
+```tsx
+{
+  start: { year: 2081, month: 8, day: 1 },
+  end: { year: 2081, month: 8, day: 30 }
+}
+```
+
+## Examples
+
+### Custom Colors
+
+```tsx
+<Calendar
+  calendarType="BS"
+  colors={{
+    primary: '#10b981',
+    selected: '#059669',
+    today: '#d1fae5',
+    hover: '#ecfdf5'
+  }}
+  onDateSelect={(date) => console.log(date)}
+/>
+```
+
+### Nepali Localization
+
+```tsx
+<Calendar
+  calendarType="BS"
+  showNepaliMonths
+  showNepaliDays
+  showNepaliNumbers
+  onDateSelect={(date) => console.log(date)}
+/>
+```
+
+### Date Constraints
+
+```tsx
+<Calendar
+  calendarType="AD"
+  minDate="2024-01-01"
+  maxDate="2024-12-31"
+  onDateSelect={(date) => console.log(date)}
+/>
+```
+
+### Dark Theme
+
+```tsx
+<Calendar
+  calendarType="BS"
+  theme="dark"
+  onDateSelect={(date) => console.log(date)}
+/>
+```
+
+### Custom Range Presets
+
+```tsx
+<Calendar
+  calendarType="BS"
+  mode="range"
+  showRangePresets
+  predefinedRanges={[
+    {
+      label: 'This Month',
+      key: 'this-month',
+      getValue: (type) => ({
+        start: { year: 2081, month: 8, day: 1 },
+        end: { year: 2081, month: 8, day: 30 }
+      })
+    }
+  ]}
+  onRangeSelect={(range) => console.log(range)}
+/>
+```
+
+## Keyboard Navigation
+
+- **Arrow Left/Right**: Navigate months
+- **Arrow Up/Down**: Navigate years
+- **PageUp/PageDown**: Navigate months
+- **Shift + PageUp/PageDown**: Navigate years
+- **Tab**: Navigate between interactive elements
+
+## Browser Support
+
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
+
+## TypeScript
+
+Full TypeScript support with exported types:
+
+```tsx
+import type { 
+  DateInfo, 
+  DateRange, 
+  DateOutput, 
+  CalendarProps 
+} from 'bs-ad-calendar'
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+MIT © [Bibek Amatya](https://github.com/bibekamatya)
+
+## Links
+
+- [GitHub Repository](https://github.com/bibekamatya/bs-ad-calendar)
+- [NPM Package](https://www.npmjs.com/package/bs-ad-calendar)
+- [Report Issues](https://github.com/bibekamatya/bs-ad-calendar/issues)

@@ -5,9 +5,10 @@ import LocalizationTab from './components/LocalizationTab'
 import RangeTab from './components/RangeTab'
 import AdvancedTab from './components/AdvancedTab'
 import CustomizationTab from './components/CustomizationTab'
+import DatePickerTab from './components/DatePickerTab'
 import './App.css'
 
-type TabType = 'basic' | 'localization' | 'range' | 'advanced' | 'customization'
+type TabType = 'basic' | 'localization' | 'range' | 'advanced' | 'customization' | 'datepicker'
 
 function App() {
   const [activeTab, setActiveTab] = useState<TabType>('basic')
@@ -79,6 +80,7 @@ function App() {
         <button onClick={() => setActiveTab('localization')} style={tabStyle('localization')}>Localization</button>
         <button onClick={() => setActiveTab('range')} style={tabStyle('range')}>Range Selection</button>
         <button onClick={() => setActiveTab('customization')} style={tabStyle('customization')}>Customization</button>
+        <button onClick={() => setActiveTab('datepicker')} style={tabStyle('datepicker')}>DatePicker</button>
         <button onClick={() => setActiveTab('advanced')} style={tabStyle('advanced')}>Advanced</button>
       </div>
 
@@ -142,6 +144,20 @@ function App() {
         <CustomizationTab
           outputAD={outputs.ad5 || ''}
           onADSelect={(data) => handleOutput('ad5', data)}
+          showCode={showCode}
+          copied={copied}
+          onToggleCode={toggleCode}
+          onCopyCode={copyCode}
+          renderOutput={renderOutput}
+        />
+      )}
+
+      {activeTab === 'datepicker' && (
+        <DatePickerTab
+          outputAD={outputs.ad6 || ''}
+          outputBS={outputs.bs6 || ''}
+          onADSelect={(data) => handleOutput('ad6', data)}
+          onBSSelect={(data) => handleOutput('bs6', data)}
           showCode={showCode}
           copied={copied}
           onToggleCode={toggleCode}
