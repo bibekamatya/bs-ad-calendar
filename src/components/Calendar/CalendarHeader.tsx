@@ -1,18 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { CalendarHeaderProps } from '../../types/index.js'
+import MonthYearPicker from './MonthYearPicker'
 import styles from './Calendar.module.css'
 
-const CalendarHeader: React.FC<CalendarHeaderProps> = ({
+interface ExtendedCalendarHeaderProps extends CalendarHeaderProps {
+  onYearChange: (year: number) => void
+  onMonthChange: (month: number) => void
+  calendarType: 'BS' | 'AD'
+}
+
+const CalendarHeader: React.FC<ExtendedCalendarHeaderProps> = ({
   currentMonth,
   currentYear,
   months,
   onNavigateMonth,
+  onYearChange,
+  onMonthChange,
   disabled = false,
   showNepaliNumbers = false,
-  convertToNepaliNumber
+  convertToNepaliNumber,
+  calendarType
 }) => {
+  const [showPicker, setShowPicker] = useState(false)
+
   return (
     <div className={styles.header}>
+      <button 
+        className={styles.navButton}
+        onClick={() => onNavigateMonth(-12)}
+        disabled={disabled}
+        aria-label="Previous year"
+        title="Previous year"
+      >
+        «
+      </button>
       <button 
         className={styles.navButton}
         onClick={() => onNavigateMonth(-1)}
@@ -21,9 +42,13 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
       >
         ‹
       </button>
-      <div className={styles.monthYear}>
+      <button 
+        className={styles.monthYear}
+        onClick={() => setShowPicker(true)}
+        disabled={disabled}
+      >
         {months[currentMonth]} {showNepaliNumbers ? convertToNepaliNumber(currentYear) : currentYear}
-      </div>
+      </button>
       <button 
         className={styles.navButton}
         onClick={() => onNavigateMonth(1)}
@@ -32,6 +57,29 @@ const CalendarHeader: React.FC<CalendarHeaderProps> = ({
       >
         ›
       </button>
+      <button 
+        className={styles.navButton}
+        onClick={() => onNavigateMonth(12)}
+        disabled={disabled}
+        aria-label="Next year"
+        title="Next year"
+      >
+        »
+      </button>
+
+      {showPicker && (
+        <MonthYearPicker
+          currentYear={currentYear}
+          currentMonth={currentMonth}
+          months={months}
+          onYearChange={onYearChange}
+          onMonthChange={onMonthChange}
+          onClose={() => setShowPicker(false)}
+          showNepaliNumbers={showNepaliNumbers}
+          convertToNepaliNumber={convertToNepaliNumber}
+          calendarType={calendarType}
+        />
+      )}
     </div>
   )
 }

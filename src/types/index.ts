@@ -33,8 +33,10 @@ export type CalendarProps = {
   onDateSelect?: (data: DateOutput) => void
   onRangeSelect?: (range: { start: DateInfo, end: DateInfo }) => void
   showRangePresets?: boolean
+  rangePresetsPosition?: 'top' | 'left'
   predefinedRanges?: PredefinedRange[]
   onPresetSelect?: (preset: PredefinedRange, range: DateRange) => void
+  renderPresets?: (props: { onRangeChange: (start: DateInfo, end: DateInfo) => void }) => React.ReactNode
   showNepaliMonths?: boolean
   showNepaliDays?: boolean
   showNepaliNumbers?: boolean
@@ -73,6 +75,7 @@ export type CalendarGridProps = {
   isSelected: (day: number) => boolean
   isInRange: (day: number) => boolean
   isToday: (day: number) => boolean
+  isDisabled?: (day: number) => boolean
   disabled?: boolean
   showNepaliNumbers?: boolean
   convertToNepaliNumber: (num: number) => string

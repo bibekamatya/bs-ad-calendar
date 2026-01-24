@@ -6,13 +6,15 @@ interface RangePresetsProps {
   calendarType: 'BS' | 'AD'
   onPresetSelect: (preset: PredefinedRange, range: DateRange) => void
   activePreset?: string
+  position?: 'top' | 'left'
 }
 
 const RangePresets: React.FC<RangePresetsProps> = ({
   presets,
   calendarType,
   onPresetSelect,
-  activePreset
+  activePreset,
+  position = 'top'
 }) => {
   const handlePresetClick = (preset: PredefinedRange) => {
     const range = preset.getValue(calendarType)
@@ -22,13 +24,17 @@ const RangePresets: React.FC<RangePresetsProps> = ({
   return (
     <div style={{
       display: 'flex',
-      flexWrap: 'wrap',
+      flexDirection: position === 'left' ? 'column' : 'row',
+      flexWrap: position === 'top' ? 'wrap' : 'nowrap',
       gap: '8px',
-      marginBottom: '16px',
+      marginBottom: position === 'top' ? '16px' : 0,
       padding: '12px',
       backgroundColor: '#f8f9fa',
       borderRadius: '6px',
-      border: '1px solid #e9ecef'
+      border: '1px solid #e9ecef',
+      minWidth: position === 'left' ? '150px' : 'auto',
+      maxWidth: position === 'left' ? '180px' : 'none',
+      flexShrink: 0
     }}>
       {presets.map(preset => (
         <button

@@ -34,21 +34,21 @@ export const useCalendar = (calendarType: CalendarProps['calendarType'] = 'AD') 
   }, [currentYear, currentMonth, calendarType])
 
   const navigateMonth = (direction: number) => {
-    if (direction === 1) {
-      if (currentMonth === 11) {
-        setCurrentMonth(0)
-        setCurrentYear(prev => prev + 1)
-      } else {
-        setCurrentMonth(prev => prev + 1)
-      }
-    } else {
-      if (currentMonth === 0) {
-        setCurrentMonth(11)
-        setCurrentYear(prev => prev - 1)
-      } else {
-        setCurrentMonth(prev => prev - 1)
-      }
+    const totalMonths = direction
+    let newMonth = currentMonth + totalMonths
+    let newYear = currentYear
+
+    while (newMonth > 11) {
+      newMonth -= 12
+      newYear += 1
     }
+    while (newMonth < 0) {
+      newMonth += 12
+      newYear -= 1
+    }
+
+    setCurrentMonth(newMonth)
+    setCurrentYear(newYear)
   }
 
   const isToday = (day: number): boolean => {

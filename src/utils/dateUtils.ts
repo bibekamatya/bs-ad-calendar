@@ -128,3 +128,42 @@ export const isDateInRange = (
   
   return dateTimestamp >= startTimestamp && dateTimestamp <= endTimestamp
 }
+
+export const parseDate = (dateStr: string, calendarType: 'BS' | 'AD'): DateInfo | null => {
+  try {
+    const [year, month, day] = dateStr.split('-').map(Number)
+    if (!year || !month || !day) return null
+    return { year, month: month - 1, day }
+  } catch {
+    return null
+  }
+}
+
+export const isDateDisabled = (
+  date: DateInfo,
+  minDate?: string,
+  maxDate?: string,
+  calendarType: 'BS' | 'AD' = 'AD'
+): boolean => {
+  if (!minDate && !maxDate) return false
+  
+  const dateTimestamp = new Date(date.year, date.month, date.day).getTime()
+  
+  if (minDate) {
+    const min = parseDate(minDate, calendarType)
+    if (min) {
+      const minTimestamp = new Date(min.year, min.month, min.day).getTime()
+      if (dateTimestamp < minTimestamp) return true
+    }
+  }
+  
+  if (maxDate) {
+    const max = parseDate(maxDate, calendarType)
+    if (max) {
+      const maxTimestamp = new Date(max.year, max.month, max.day).getTime()
+      if (dateTimestamp > maxTimestamp) return true
+    }
+  }
+  
+  return false
+}

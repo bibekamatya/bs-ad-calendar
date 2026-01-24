@@ -9,6 +9,7 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
   isSelected,
   isInRange,
   isToday,
+  isDisabled,
   disabled = false,
   showNepaliNumbers = false,
   convertToNepaliNumber
@@ -23,20 +24,24 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
       ))}
 
       {/* Calendar days */}
-      {calendarDays.map((day, index) => (
-        <div
-          key={index}
-          className={`${styles.day} ${
-            day === null ? styles.dayOtherMonth :
-            isSelected(day) ? styles.daySelected :
-            isInRange(day) ? styles.dayToday :
-            isToday(day) ? styles.dayToday : ''
-          } ${disabled ? styles.dayDisabled : ''}`}
-          onClick={() => day && onDateSelect(day)}
-        >
-          {day ? (showNepaliNumbers ? convertToNepaliNumber(day) : day) : ''}
-        </div>
-      ))}
+      {calendarDays.map((day, index) => {
+        const dayDisabled = day ? (isDisabled?.(day) || disabled) : false
+        return (
+          <div
+            key={index}
+            className={`${styles.day} ${
+              day === null ? styles.dayOtherMonth :
+              dayDisabled ? styles.dayDisabled :
+              isSelected(day) ? styles.daySelected :
+              isInRange(day) ? styles.dayInRange :
+              isToday(day) ? styles.dayToday : ''
+            }`}
+            onClick={() => day && !dayDisabled && onDateSelect(day)}
+          >
+            {day ? (showNepaliNumbers ? convertToNepaliNumber(day) : day) : ''}
+          </div>
+        )
+      })}
     </div>
   )
 }
