@@ -5,12 +5,14 @@ import LocalizationTab from './components/LocalizationTab'
 import RangeTab from './components/RangeTab'
 import CustomizationTab from './components/CustomizationTab'
 import DatePickerTab from './components/DatePickerTab'
+import AboutTab from './components/AboutTab'
+import Tabs from './components/Tabs'
 import './App.css'
 
-type TabType = 'basic' | 'localization' | 'range' | 'customization' | 'datepicker'
+type TabType = 'about' | 'basic' | 'localization' | 'range' | 'customization' | 'datepicker'
 
 function App() {
-  const [activeTab, setActiveTab] = useState<TabType>('basic')
+  const [activeTab, setActiveTab] = useState<TabType>('about')
   const [outputs, setOutputs] = useState<Record<string, string>>({})
   const [showCode, setShowCode] = useState<string | null>(null)
   const [copied, setCopied] = useState<string | null>(null)
@@ -32,21 +34,6 @@ function App() {
   const toggleCode = (id: string) => {
     setShowCode(showCode === id ? null : id)
   }
-
-  const tabStyle = (tab: TabType) => ({
-    padding: '12px 24px',
-    fontSize: '14px',
-    cursor: 'pointer',
-    border: 'none',
-    borderBottom: activeTab === tab ? '2px solid #0d9488' : '2px solid transparent',
-    background: activeTab === tab ? '#e6faf8' : 'white',
-    color: activeTab === tab ? '#0d9488' : '#6b7280',
-    fontWeight: '500',
-    transition: 'all 0.2s',
-    outline: 'none',
-    whiteSpace: 'nowrap',
-    flexShrink: 0
-  })
 
   const renderOutput = (output: string) => {
     if (!output) return null
@@ -74,16 +61,38 @@ function App() {
   }
 
   return (
-    <div className="App" style={{ background: '#f9fafb', minHeight: '100vh', paddingTop: '10px' }}>
-      <h1 style={{ textAlign: 'center', marginBottom: '15px', color: '#111827', fontSize: '24px' }}>BS-AD Calendar Examples</h1>
-
-      <div style={{ display: 'flex', gap: '0', marginBottom: '15px', background: 'white', borderRadius: '8px', overflowX: 'auto', overflowY: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', flexWrap: 'nowrap', justifyContent: 'center' }}>
-        <button onClick={() => setActiveTab('basic')} style={tabStyle('basic')}>Basic</button>
-        <button onClick={() => setActiveTab('datepicker')} style={tabStyle('datepicker')}>CalendarInput</button>
-        <button onClick={() => setActiveTab('range')} style={tabStyle('range')}>Range Selection</button>
-        <button onClick={() => setActiveTab('localization')} style={tabStyle('localization')}>Localization</button>
-        <button onClick={() => setActiveTab('customization')} style={tabStyle('customization')}>Customization</button>
+    <div className="bg-gradient-to-br from-gray-50 via-gray-50 to-gray-100 min-h-screen">
+      {/* Header */}
+      <div className="bg-white border-b border-gray-200">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-1">BS-AD Calendar</h1>
+          <p className="text-gray-600 text-sm">Modern React calendar component supporting Bikram Sambat (BS) and Gregorian (AD) calendars</p>
+        </div>
       </div>
+
+      {/* Main Content */}
+      <div className="px-4 sm:px-6 lg:px-8 py-12">
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Tabs - Fixed on left */}
+          <div className="md:fixed md:left-0 md:top-0 md:h-screen md:w-48 md:overflow-y-auto md:pt-32 md:pl-4 md:pr-4 md:bg-white md:border-r md:border-gray-200 flex-shrink-0">
+            <Tabs
+              tabs={[
+                { id: 'about', label: 'About' },
+                { id: 'basic', label: 'Basic' },
+                { id: 'datepicker', label: 'CalendarInput' },
+                { id: 'range', label: 'Range Selection' },
+                { id: 'localization', label: 'Localization' },
+                { id: 'customization', label: 'Customization' }
+              ]}
+              activeTab={activeTab}
+              onTabChange={(tabId) => setActiveTab(tabId as TabType)}
+            />
+          </div>
+
+          {/* Content */}
+          <div className="flex-1 bg-white rounded-xl shadow-md p-12 animate-fadeIn md:ml-56">
+
+      {activeTab === 'about' && <AboutTab />}
 
       {activeTab === 'basic' && (
         <BasicTab
@@ -152,6 +161,9 @@ function App() {
           renderOutput={renderOutput}
         />
       )}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
