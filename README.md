@@ -5,6 +5,8 @@ A modern, feature-rich React calendar component supporting both **Bikram Sambat 
 [![npm version](https://img.shields.io/npm/v/bs-ad-calendar-react.svg)](https://www.npmjs.com/package/bs-ad-calendar-react)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
+## 🎯 [Live Demo](https://bibekamatya.github.io/bs-ad-calendar-react/)
+
 ## Features
 
 ✨ **Dual Calendar Support** - Switch between BS (Nepali) and AD (Gregorian) calendars  
@@ -20,15 +22,15 @@ A modern, feature-rich React calendar component supporting both **Bikram Sambat 
 ## Installation
 
 ```bash
-npm install bs-ad-calendar
+npm install bs-ad-calendar-react
 ```
 
 ```bash
-yarn add bs-ad-calendar
+yarn add bs-ad-calendar-react
 ```
 
 ```bash
-pnpm add bs-ad-calendar
+pnpm add bs-ad-calendar-react
 ```
 
 ## Quick Start
@@ -36,7 +38,7 @@ pnpm add bs-ad-calendar
 ### Basic Calendar
 
 ```tsx
-import { Calendar } from 'bs-ad-calendar'
+import { Calendar } from 'bs-ad-calendar-react'
 
 function App() {
   return (
@@ -51,7 +53,7 @@ function App() {
 ### DatePicker with Input
 
 ```tsx
-import { DatePicker } from 'bs-ad-calendar'
+import { DatePicker } from 'bs-ad-calendar-react'
 
 function App() {
   return (
@@ -67,7 +69,7 @@ function App() {
 ### Range Selection
 
 ```tsx
-import { Calendar } from 'bs-ad-calendar'
+import { Calendar } from 'bs-ad-calendar-react'
 
 function App() {
   return (
@@ -247,7 +249,7 @@ import type {
   DateRange, 
   DateOutput, 
   CalendarProps 
-} from 'bs-ad-calendar'
+} from 'bs-ad-calendar-react'
 ```
 
 ## Contributing
@@ -260,6 +262,6 @@ MIT © [Bibek Amatya](https://github.com/bibekamatya)
 
 ## Links
 
-- [GitHub Repository](https://github.com/bibekamatya/bs-ad-calendar)
-- [NPM Package](https://www.npmjs.com/package/bs-ad-calendar)
-- [Report Issues](https://github.com/bibekamatya/bs-ad-calendar/issues)
+- [GitHub Repository](https://github.com/bibekamatya/bs-ad-calendar-react)
+- [NPM Package](https://www.npmjs.com/package/bs-ad-calendar-react)
+- [Report Issues](https://github.com/bibekamatya/bs-ad-calendar-react/issues)
