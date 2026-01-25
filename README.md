@@ -5,7 +5,7 @@ A modern, feature-rich React calendar component supporting both **Bikram Sambat 
 [![npm version](https://img.shields.io/npm/v/bs-ad-calendar-react.svg)](https://www.npmjs.com/package/bs-ad-calendar-react)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## 🎯 [Live Demo](https://bibekamatya.github.io/bs-ad-calendar-react/)
+## 🎯 [Live Demo](https://bibekamatya.github.io/bs-ad-calendar/)
 
 ## Features
 
@@ -262,6 +262,7 @@ MIT © [Bibek Amatya](https://github.com/bibekamatya)
 
 ## Links
 
-- [GitHub Repository](https://github.com/bibekamatya/bs-ad-calendar-react)
+- [GitHub Repository](https://github.com/bibekamatya/bs-ad-calendar)
 - [NPM Package](https://www.npmjs.com/package/bs-ad-calendar-react)
-- [Report Issues](https://github.com/bibekamatya/bs-ad-calendar-react/issues)
+- [Live Demo](https://bibekamatya.github.io/bs-ad-calendar/)
+- [Report Issues](https://github.com/bibekamatya/bs-ad-calendar/issues)
