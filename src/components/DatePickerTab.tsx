@@ -39,10 +39,10 @@ const DatePickerTab: React.FC<DatePickerTabProps> = ({
 
   return (
     <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '20px' }}>
         {/* AD DatePicker */}
-        <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'white' }}>
-          <h3 style={{ color: '#111827', marginTop: 0, marginBottom: '15px', fontSize: '18px' }}>AD CalendarInput</h3>
+        <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '12px', background: 'white' }}>
+          <h3 style={{ color: '#111827', marginTop: 0, marginBottom: '12px', fontSize: '16px' }}>AD CalendarInput</h3>
           <CalendarInput
             calendarType="AD"
             placeholder="Select AD date"
@@ -53,9 +53,9 @@ const DatePickerTab: React.FC<DatePickerTabProps> = ({
           <button 
             onClick={() => onToggleCode('datepicker-ad')} 
             style={{ 
-              marginTop: '15px', 
-              padding: '8px 16px', 
-              fontSize: '13px', 
+              marginTop: '10px', 
+              padding: '6px 12px', 
+              fontSize: '12px', 
               cursor: 'pointer', 
               borderRadius: '4px', 
               border: '1px solid #e5e7eb', 
@@ -100,8 +100,8 @@ const DatePickerTab: React.FC<DatePickerTabProps> = ({
         </div>
 
         {/* BS DatePicker */}
-        <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'white' }}>
-          <h3 style={{ color: '#111827', marginTop: 0, marginBottom: '15px', fontSize: '18px' }}>BS CalendarInput</h3>
+        <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '12px', background: 'white' }}>
+          <h3 style={{ color: '#111827', marginTop: 0, marginBottom: '12px', fontSize: '16px' }}>BS CalendarInput</h3>
           <CalendarInput
             calendarType="BS"
             placeholder="Select BS date"
@@ -112,9 +112,9 @@ const DatePickerTab: React.FC<DatePickerTabProps> = ({
           <button 
             onClick={() => onToggleCode('datepicker-bs')} 
             style={{ 
-              marginTop: '15px', 
-              padding: '8px 16px', 
-              fontSize: '13px', 
+              marginTop: '10px', 
+              padding: '6px 12px', 
+              fontSize: '12px', 
               cursor: 'pointer', 
               borderRadius: '4px', 
               border: '1px solid #e5e7eb', 

@@ -45,29 +45,29 @@ const CustomizationTab: React.FC<CustomizationTabProps> = ({
 
   return (
     <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-      <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '20px', background: 'white' }}>
-        <h3 style={{ color: '#111827', marginTop: 0, marginBottom: '15px', fontSize: '18px' }}>Live Color Customization</h3>
+      <div style={{ border: 'none', borderRadius: '0px', padding: '0px', background: 'transparent' }}>
+        <h3 style={{ color: '#111827', marginTop: 0, marginBottom: '8px', fontSize: '16px' }}>Live Color Customization</h3>
         
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '8px' }}>
           <div>
-            <div style={{ marginBottom: '15px' }}>
-              <label style={{ display: 'block', marginBottom: '5px', fontSize: '13px', fontWeight: '500', color: '#111827' }}>Primary Color</label>
-              <small style={{ display: 'block', marginBottom: '5px', fontSize: '11px', color: '#6b7280' }}>Text color for today's date</small>
+            <div style={{ marginBottom: '8px' }}>
+              <label style={{ display: 'block', marginBottom: '3px', fontSize: '12px', fontWeight: '500', color: '#111827' }}>Primary Color</label>
+              <small style={{ display: 'block', marginBottom: '3px', fontSize: '10px', color: '#6b7280' }}>Text color for today's date</small>
               <input type="color" value={colors.primary} onChange={(e) => handleColorChange('primary', e.target.value)} style={{ width: '28px', height: '28px', cursor: 'pointer', borderRadius: '50%', border: '2px solid #e5e7eb' }} />
             </div>
-            <div style={{ marginBottom: '15px' }}>
-              <label style={{ display: 'block', marginBottom: '5px', fontSize: '13px', fontWeight: '500', color: '#111827' }}>Selected Color</label>
-              <small style={{ display: 'block', marginBottom: '5px', fontSize: '11px', color: '#6b7280' }}>Background for selected date</small>
+            <div style={{ marginBottom: '8px' }}>
+              <label style={{ display: 'block', marginBottom: '3px', fontSize: '12px', fontWeight: '500', color: '#111827' }}>Selected Color</label>
+              <small style={{ display: 'block', marginBottom: '3px', fontSize: '10px', color: '#6b7280' }}>Background for selected date</small>
               <input type="color" value={colors.selected} onChange={(e) => handleColorChange('selected', e.target.value)} style={{ width: '28px', height: '28px', cursor: 'pointer', borderRadius: '50%', border: '2px solid #e5e7eb' }} />
             </div>
-            <div style={{ marginBottom: '15px' }}>
-              <label style={{ display: 'block', marginBottom: '5px', fontSize: '13px', fontWeight: '500', color: '#111827' }}>Today Color</label>
-              <small style={{ display: 'block', marginBottom: '5px', fontSize: '11px', color: '#6b7280' }}>Background for today's date</small>
+            <div style={{ marginBottom: '8px' }}>
+              <label style={{ display: 'block', marginBottom: '3px', fontSize: '12px', fontWeight: '500', color: '#111827' }}>Today Color</label>
+              <small style={{ display: 'block', marginBottom: '3px', fontSize: '10px', color: '#6b7280' }}>Background for today's date</small>
               <input type="color" value={colors.today} onChange={(e) => handleColorChange('today', e.target.value)} style={{ width: '28px', height: '28px', cursor: 'pointer', borderRadius: '50%', border: '2px solid #e5e7eb' }} />
             </div>
-            <div style={{ marginBottom: '15px' }}>
-              <label style={{ display: 'block', marginBottom: '5px', fontSize: '13px', fontWeight: '500', color: '#111827' }}>Hover Color</label>
-              <small style={{ display: 'block', marginBottom: '5px', fontSize: '11px', color: '#6b7280' }}>Background on date hover</small>
+            <div style={{ marginBottom: '8px' }}>
+              <label style={{ display: 'block', marginBottom: '3px', fontSize: '12px', fontWeight: '500', color: '#111827' }}>Hover Color</label>
+              <small style={{ display: 'block', marginBottom: '3px', fontSize: '10px', color: '#6b7280' }}>Background on date hover</small>
               <input type="color" value={colors.hover} onChange={(e) => handleColorChange('hover', e.target.value)} style={{ width: '28px', height: '28px', cursor: 'pointer', borderRadius: '50%', border: '2px solid #e5e7eb' }} />
             </div>
           </div>
@@ -86,9 +86,9 @@ const CustomizationTab: React.FC<CustomizationTabProps> = ({
         <button 
           onClick={() => onToggleCode('custom-live')} 
           style={{ 
-            marginTop: '15px', 
-            padding: '8px 16px', 
-            fontSize: '13px', 
+            marginTop: '10px', 
+            padding: '6px 12px', 
+            fontSize: '12px', 
             cursor: 'pointer', 
             borderRadius: '4px', 
             border: '1px solid #e5e7eb', 

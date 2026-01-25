@@ -90,7 +90,7 @@ function App() {
           </div>
 
           {/* Content */}
-          <div className="flex-1 bg-white rounded-xl shadow-md p-12 animate-fadeIn md:ml-56">
+          <div className="flex-1 bg-white md:rounded-xl md:shadow-md md:p-8 animate-fadeIn md:ml-56">
 
       {activeTab === 'about' && <AboutTab />}
 

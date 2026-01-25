@@ -8,16 +8,29 @@ interface TabsProps {
 
 const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, onTabChange }) => {
   return (
-    <div className="flex flex-col md:flex-row gap-6">
-      {/* Tabs */}
-      <div className="flex md:flex-col overflow-x-auto md:overflow-x-visible overflow-y-hidden flex-nowrap md:flex-wrap gap-2 pb-4 md:pb-0 px-1 md:w-48">
+    <>
+      {/* Mobile: Dropdown */}
+      <div className="md:hidden mb-4">
+        <select
+          value={activeTab}
+          onChange={(e) => onTabChange(e.target.value)}
+          style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', background: '#ffffff', color: '#111827', fontWeight: '500', fontSize: '14px' }}
+        >
+          {tabs.map(tab => (
+            <option key={tab.id} value={tab.id}>{tab.label}</option>
+          ))}
+        </select>
+      </div>
+
+      {/* Desktop: Vertical tabs */}
+      <div className="hidden md:flex md:flex-col gap-2">
         {tabs.map(tab => (
           <button
             key={tab.id}
             onClick={() => onTabChange(tab.id)}
-            className={`px-6 py-3 rounded-lg font-medium text-sm whitespace-nowrap md:w-full text-left transition-all duration-200 ${
+            className={`px-6 py-3 rounded-lg font-medium text-sm whitespace-nowrap transition-all duration-200 ${
               activeTab === tab.id
-                ? 'bg-teal-600 !text-white shadow-lg shadow-teal-600/30 scale-105 md:scale-100'
+                ? 'bg-teal-600 !text-white shadow-lg shadow-teal-600/30'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200 hover:text-gray-900'
             }`}
           >
@@ -25,7 +38,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, onTabChange }) => {
           </button>
         ))}
       </div>
-    </div>
+    </>
   )
 }
 
