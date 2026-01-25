@@ -5,7 +5,6 @@ import type { DateOutput } from '../types'
 interface CustomizationTabProps {
   outputAD: string
   onADSelect: (data: DateOutput) => void
-  showCode: string | null
   copied: string | null
   onToggleCode: (id: string) => void
   onCopyCode: (code: string, id: string) => void
@@ -15,7 +14,6 @@ interface CustomizationTabProps {
 const CustomizationTab: React.FC<CustomizationTabProps> = ({
   outputAD,
   onADSelect,
-  showCode,
   copied,
   onToggleCode,
   onCopyCode,

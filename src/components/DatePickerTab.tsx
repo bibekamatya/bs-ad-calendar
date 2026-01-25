@@ -7,7 +7,6 @@ interface DatePickerTabProps {
   outputBS: string
   onADSelect: (data: DateOutput) => void
   onBSSelect: (data: DateOutput) => void
-  showCode: string | null
   copied: string | null
   onToggleCode: (id: string) => void
   onCopyCode: (code: string, id: string) => void
@@ -19,7 +18,6 @@ const DatePickerTab: React.FC<DatePickerTabProps> = ({
   outputBS,
   onADSelect,
   onBSSelect,
-  showCode,
   copied,
   onToggleCode,
   onCopyCode,
