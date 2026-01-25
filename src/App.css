@@ -55,3 +55,17 @@ input[type="color"]::-webkit-color-swatch {
 .read-the-docs {
   color: #888;
 }
+
+@media (max-width: 768px) {
+  .App button {
+    padding: 10px 16px !important;
+    font-size: 12px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .App button {
+    padding: 8px 12px !important;
+    font-size: 11px !important;
+  }
+}

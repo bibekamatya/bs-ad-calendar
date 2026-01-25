@@ -224,7 +224,7 @@ const Calendar: React.FC<CalendarProps> = ({
       )}
 
       {mode === 'range' && showRangePresets && rangePresetsPosition === 'left' && !renderPresets && (
-        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'nowrap', overflow: 'auto' }}>
           <RangePresets
             presets={rangePresets}
             calendarType={calendarType}
@@ -232,7 +232,7 @@ const Calendar: React.FC<CalendarProps> = ({
             activePreset={activePreset}
             position="left"
           />
-          <div style={{ flex: '1 1 280px', minWidth: '280px' }}>
+          <div style={{ flex: '0 0 auto', minWidth: '280px' }}>
             <CalendarHeader
               currentMonth={currentMonth}
               currentYear={currentYear}

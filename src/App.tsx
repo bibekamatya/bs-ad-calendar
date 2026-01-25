@@ -38,12 +38,14 @@ function App() {
     fontSize: '14px',
     cursor: 'pointer',
     border: 'none',
-    borderBottom: activeTab === tab ? '2px solid #3b82f6' : '2px solid transparent',
-    background: activeTab === tab ? '#eff6ff' : 'white',
-    color: activeTab === tab ? '#3b82f6' : '#6b7280',
+    borderBottom: activeTab === tab ? '2px solid #0d9488' : '2px solid transparent',
+    background: activeTab === tab ? '#e6faf8' : 'white',
+    color: activeTab === tab ? '#0d9488' : '#6b7280',
     fontWeight: '500',
     transition: 'all 0.2s',
-    outline: 'none'
+    outline: 'none',
+    whiteSpace: 'nowrap',
+    flexShrink: 0
   })
 
   const renderOutput = (output: string) => {
@@ -75,7 +77,7 @@ function App() {
     <div className="App" style={{ background: '#f9fafb', minHeight: '100vh', paddingTop: '10px' }}>
       <h1 style={{ textAlign: 'center', marginBottom: '15px', color: '#111827', fontSize: '24px' }}>BS-AD Calendar Examples</h1>
 
-      <div style={{ display: 'flex', gap: '0', marginBottom: '15px', background: 'white', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', justifyContent: 'center' }}>
+      <div style={{ display: 'flex', gap: '0', marginBottom: '15px', background: 'white', borderRadius: '8px', overflowX: 'auto', overflowY: 'hidden', boxShadow: '0 1px 3px rgba(0,0,0,0.1)', flexWrap: 'nowrap', justifyContent: 'center' }}>
         <button onClick={() => setActiveTab('basic')} style={tabStyle('basic')}>Basic</button>
         <button onClick={() => setActiveTab('datepicker')} style={tabStyle('datepicker')}>CalendarInput</button>
         <button onClick={() => setActiveTab('range')} style={tabStyle('range')}>Range Selection</button>
