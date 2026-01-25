@@ -36,7 +36,7 @@ const LocalizationTab: React.FC<LocalizationTabProps> = ({
   onDateSelect={(data) => console.log(data)}
 />`}
         codeId="local-ad"
-        showCode={showCode}
+        showCode="local-ad"
         copied={copied}
         onToggleCode={onToggleCode}
         onCopyCode={onCopyCode}
@@ -55,7 +55,7 @@ const LocalizationTab: React.FC<LocalizationTabProps> = ({
   onDateSelect={(data) => console.log(data)}
 />`}
         codeId="local-bs"
-        showCode={showCode}
+        showCode="local-bs"
         copied={copied}
         onToggleCode={onToggleCode}
         onCopyCode={onCopyCode}

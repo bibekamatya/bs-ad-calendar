@@ -38,7 +38,7 @@ const RangeTab: React.FC<RangeTabProps> = ({
   onRangeSelect={(range) => console.log(range)}
 />`}
         codeId="range-basic"
-        showCode={showCode}
+        showCode="range-basic"
         copied={copied}
         onToggleCode={onToggleCode}
         onCopyCode={onCopyCode}
@@ -75,7 +75,7 @@ const RangeTab: React.FC<RangeTabProps> = ({
   onRangeSelect={(range) => console.log(range)}
 />`}
         codeId="range-custom"
-        showCode={showCode}
+        showCode="range-custom"
         copied={copied}
         onToggleCode={onToggleCode}
         onCopyCode={onCopyCode}

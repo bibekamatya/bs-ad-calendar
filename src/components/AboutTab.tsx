@@ -11,6 +11,18 @@ const AboutTab: React.FC = () => {
   return (
     <div className="space-y-8">
       <section>
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Core Feature</h2>
+        <div style={{ background: '#f0fdf4', border: '2px solid #10b981', padding: '16px', borderRadius: '8px', marginBottom: '16px' }}>
+          <p style={{ color: '#111827', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
+            Click any date on either BS or AD calendar and instantly get both calendar outputs
+          </p>
+          <p style={{ color: '#374151', margin: '0' }}>
+            When you select a date, you receive both the Bikram Sambat and Gregorian equivalents with formatted output.
+          </p>
+        </div>
+      </section>
+
+      <section>
         <h2 className="text-2xl font-bold text-gray-900 mb-4">About BS-AD Calendar</h2>
         <p className="text-gray-600 mb-4">
           A modern, feature-rich React calendar component supporting both Bikram Sambat (BS) and Gregorian (AD) calendars with full TypeScript support.

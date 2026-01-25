@@ -63,10 +63,10 @@ const DatePickerTab: React.FC<DatePickerTabProps> = ({
               color: '#111827' 
             }}
           >
-            {showCode === 'datepicker-ad' ? 'Hide Code' : 'Show Code'}
+            Hide Code
           </button>
 
-          {showCode === 'datepicker-ad' && (
+          {true && (
             <div style={{ position: 'relative', marginTop: '15px' }}>
               <pre style={{ 
                 background: '#1f2937', 
@@ -122,10 +122,10 @@ const DatePickerTab: React.FC<DatePickerTabProps> = ({
               color: '#111827' 
             }}
           >
-            {showCode === 'datepicker-bs' ? 'Hide Code' : 'Show Code'}
+            Hide Code
           </button>
 
-          {showCode === 'datepicker-bs' && (
+          {true && (
             <div style={{ position: 'relative', marginTop: '15px' }}>
               <pre style={{ 
                 background: '#1f2937', 

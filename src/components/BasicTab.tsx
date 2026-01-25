@@ -35,7 +35,7 @@ const BasicTab: React.FC<BasicTabProps> = ({
   onDateSelect={(data) => console.log(data)}
 />`}
         codeId="basic-ad"
-        showCode={showCode}
+        showCode="basic-ad"
         copied={copied}
         onToggleCode={onToggleCode}
         onCopyCode={onCopyCode}
@@ -51,7 +51,7 @@ const BasicTab: React.FC<BasicTabProps> = ({
   onDateSelect={(data) => console.log(data)}
 />`}
         codeId="basic-bs"
-        showCode={showCode}
+        showCode="basic-bs"
         copied={copied}
         onToggleCode={onToggleCode}
         onCopyCode={onCopyCode}

@@ -1,23 +1,45 @@
 # BS-AD Calendar
 
-A modern, feature-rich React calendar component supporting both **Bikram Sambat (BS)** and **Gregorian (AD)** calendars with full TypeScript support.
+A modern React calendar component for seamless conversion between **Bikram Sambat (BS)** and **Gregorian (AD)** calendars.
 
 [![npm version](https://img.shields.io/npm/v/bs-ad-calendar-react.svg)](https://www.npmjs.com/package/bs-ad-calendar-react)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-## 🎯 [Live Demo](https://bibekamatya.github.io/bs-ad-calendar/)
+## Live Demo
+
+[View Demo](https://bibekamatya.github.io/bs-ad-calendar/)
+
+## Key Feature
+
+**Select any date → Get both BS and AD dates automatically**
+
+When you click a date on either calendar, you instantly receive both the BS and AD equivalents with formatted output.
+
+**Example Output:**
+```
+Input: Click on Poush 15, 2081 (BS Calendar)
+
+Output:
+{
+  bs: "2081-09-15",
+  ad: "2024-12-31",
+  formatted: {
+    bs: "Poush 15, 2081",
+    ad: "December 31, 2024"
+  }
+}
+```
 
 ## Features
 
-✨ **Dual Calendar Support** - Switch between BS (Nepali) and AD (Gregorian) calendars  
-🎨 **Customizable Themes** - Light/dark themes with custom color support  
-📅 **Date & Range Selection** - Single date or date range selection modes  
-🌏 **Localization** - Nepali months, days, and number support  
-⌨️ **Keyboard Navigation** - Full keyboard accessibility  
-📱 **Responsive Design** - Works on all screen sizes  
-🎯 **DatePicker Component** - Input field with popup calendar  
-🔧 **TypeScript** - Full type definitions included  
-♿ **Accessible** - ARIA labels and keyboard navigation
+- Automatic dual calendar conversion
+- Single date and range selection modes
+- Customizable themes (light/dark)
+- Nepali localization support
+- Full keyboard navigation
+- Responsive design
+- Complete TypeScript support
+- Accessible (ARIA labels)
 
 ## Installation
 
@@ -25,37 +47,34 @@ A modern, feature-rich React calendar component supporting both **Bikram Sambat 
 npm install bs-ad-calendar-react
 ```
 
-```bash
-yarn add bs-ad-calendar-react
-```
-
-```bash
-pnpm add bs-ad-calendar-react
-```
-
 ## Quick Start
 
-### Basic Calendar
+### Basic Usage
 
 ```tsx
 import { Calendar } from 'bs-ad-calendar-react'
 
-function App() {
+export default function App() {
   return (
     <Calendar
       calendarType="BS"
-      onDateSelect={(date) => console.log(date)}
+      onDateSelect={(date) => {
+        console.log(date.bs)           // "2081-09-15"
+        console.log(date.ad)           // "2024-12-31"
+        console.log(date.formatted.bs) // "Poush 15, 2081"
+        console.log(date.formatted.ad) // "December 31, 2024"
+      }}
     />
   )
 }
 ```
 
-### DatePicker with Input
+### DatePicker Input
 
 ```tsx
 import { DatePicker } from 'bs-ad-calendar-react'
 
-function App() {
+export default function App() {
   return (
     <DatePicker
       calendarType="AD"
@@ -71,7 +90,7 @@ function App() {
 ```tsx
 import { Calendar } from 'bs-ad-calendar-react'
 
-function App() {
+export default function App() {
   return (
     <Calendar
       calendarType="BS"
@@ -91,72 +110,45 @@ function App() {
 |------|------|---------|-------------|
 | `calendarType` | `'BS' \| 'AD'` | `'AD'` | Calendar type |
 | `mode` | `'single' \| 'range'` | `'single'` | Selection mode |
-| `onDateSelect` | `(date: DateOutput) => void` | - | Single date selection callback |
+| `onDateSelect` | `(date: DateOutput) => void` | - | Date selection callback |
 | `onRangeSelect` | `(range: DateRange) => void` | - | Range selection callback |
-| `showToday` | `boolean` | `true` | Highlight today's date |
-| `disabled` | `boolean` | `false` | Disable calendar interaction |
-| `minDate` | `string` | - | Minimum selectable date (ISO format) |
-| `maxDate` | `string` | - | Maximum selectable date (ISO format) |
-| `theme` | `'light' \| 'dark' \| 'custom'` | `'light'` | Theme variant |
-| `colors` | `ColorConfig` | - | Custom color configuration |
-| `showNepaliMonths` | `boolean` | `false` | Show Nepali month names |
-| `showNepaliDays` | `boolean` | `false` | Show Nepali day names |
-| `showNepaliNumbers` | `boolean` | `false` | Show Nepali numerals |
-| `showRangePresets` | `boolean` | `false` | Show range preset buttons |
-| `predefinedRanges` | `PredefinedRange[]` | - | Custom range presets (replaces defaults) |
-| `rangePresetsPosition` | `'top' \| 'left'` | `'top'` | Position of range presets |
-| `className` | `string` | - | Additional CSS class |
+| `showToday` | `boolean` | `true` | Highlight today |
+| `disabled` | `boolean` | `false` | Disable interaction |
+| `minDate` | `string` | - | Min selectable date |
+| `maxDate` | `string` | - | Max selectable date |
+| `theme` | `'light' \| 'dark'` | `'light'` | Theme variant |
+| `colors` | `ColorConfig` | - | Custom colors |
+| `showNepaliMonths` | `boolean` | `false` | Nepali month names |
+| `showNepaliDays` | `boolean` | `false` | Nepali day names |
+| `showNepaliNumbers` | `boolean` | `false` | Nepali numerals |
+| `showRangePresets` | `boolean` | `false` | Show preset buttons |
 
 ### DatePicker Props
 
-Extends all Calendar props plus:
+Extends Calendar props plus:
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `placeholder` | `string` | `'Select date'` | Input placeholder text |
-| `inputClassName` | `string` | - | Input container CSS class |
-| `popupClassName` | `string` | - | Popup calendar CSS class |
+| `placeholder` | `string` | `'Select date'` | Input placeholder |
+| `inputClassName` | `string` | - | Input CSS class |
+| `popupClassName` | `string` | - | Popup CSS class |
 
-### Color Configuration
-
-```tsx
-colors={{
-  primary: '#3b82f6',      // Primary accent color
-  selected: '#3b82f6',     // Selected date background
-  today: '#dbeafe',        // Today's date background
-  hover: '#eff6ff',        // Hover state background
-  background: '#ffffff',   // Calendar background
-  text: '#1f2937',        // Text color
-  border: '#e5e7eb',      // Border color
-  disabled: '#d1d5db'     // Disabled date color
-}}
-```
-
-### Date Output Format
+### Output Format
 
 ```tsx
 {
-  bs: "2081-09-15",           // BS date (ISO format)
-  ad: "2024-12-31",           // AD date (ISO format)
+  bs: "2081-09-15",
+  ad: "2024-12-31",
   formatted: {
-    bs: "Poush 15, 2081",     // Formatted BS date
-    ad: "December 31, 2024"   // Formatted AD date
+    bs: "Poush 15, 2081",
+    ad: "December 31, 2024"
   }
-}
-```
-
-### Range Output Format
-
-```tsx
-{
-  start: { year: 2081, month: 8, day: 1 },
-  end: { year: 2081, month: 8, day: 30 }
 }
 ```
 
 ## Examples
 
-### Custom Colors
+### Custom Theme
 
 ```tsx
 <Calendar
@@ -164,8 +156,7 @@ colors={{
   colors={{
     primary: '#10b981',
     selected: '#059669',
-    today: '#d1fae5',
-    hover: '#ecfdf5'
+    today: '#d1fae5'
   }}
   onDateSelect={(date) => console.log(date)}
 />
@@ -183,89 +174,34 @@ colors={{
 />
 ```
 
-### Date Constraints
-
-```tsx
-<Calendar
-  calendarType="AD"
-  minDate="2024-01-01"
-  maxDate="2024-12-31"
-  onDateSelect={(date) => console.log(date)}
-/>
-```
-
-### Dark Theme
-
-```tsx
-<Calendar
-  calendarType="BS"
-  theme="dark"
-  onDateSelect={(date) => console.log(date)}
-/>
-```
-
-### Custom Range Presets
+### Date Range
 
 ```tsx
 <Calendar
   calendarType="BS"
   mode="range"
-  showRangePresets
-  predefinedRanges={[
-    {
-      label: 'Last 30 Days',
-      key: 'last-30-days',
-      getValue: (type) => ({
-        start: { year: 2081, month: 8, day: 1 },
-        end: { year: 2081, month: 8, day: 30 }
-      })
-    },
-    {
-      label: 'Last 180 Days',
-      key: 'last-180-days',
-      getValue: (type) => ({
-        start: { year: 2081, month: 2, day: 1 },
-        end: { year: 2081, month: 8, day: 30 }
-      })
-    }
-  ]}
+  minDate="2024-01-01"
+  maxDate="2024-12-31"
   onRangeSelect={(range) => console.log(range)}
 />
 ```
 
-**Note:** Pass `predefinedRanges` to replace default presets. If not provided, default presets (Today, Yesterday, Last 7 Days, Last 30 Days, etc.) will be used.
-
 ## Keyboard Navigation
 
-- **Arrow Left/Right**: Navigate months
-- **Arrow Up/Down**: Navigate years
-- **PageUp/PageDown**: Navigate months
-- **Shift + PageUp/PageDown**: Navigate years
-- **Tab**: Navigate between interactive elements
+- Arrow Left/Right - Navigate months
+- Arrow Up/Down - Navigate years
+- PageUp/PageDown - Navigate months
+- Shift + PageUp/PageDown - Navigate years
 
 ## Browser Support
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+Chrome, Firefox, Safari, Edge (latest versions)
 
 ## TypeScript
 
-Full TypeScript support with exported types:
-
 ```tsx
-import type { 
-  DateInfo, 
-  DateRange, 
-  DateOutput, 
-  CalendarProps 
-} from 'bs-ad-calendar-react'
+import type { DateOutput, DateRange, CalendarProps } from 'bs-ad-calendar-react'
 ```
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## License
 
@@ -273,7 +209,6 @@ MIT © [Bibek Amatya](https://github.com/bibekamatya)
 
 ## Links
 
-- [GitHub Repository](https://github.com/bibekamatya/bs-ad-calendar)
-- [NPM Package](https://www.npmjs.com/package/bs-ad-calendar-react)
-- [Live Demo](https://bibekamatya.github.io/bs-ad-calendar/)
-- [Report Issues](https://github.com/bibekamatya/bs-ad-calendar/issues)
+- [GitHub](https://github.com/bibekamatya/bs-ad-calendar)
+- [NPM](https://www.npmjs.com/package/bs-ad-calendar-react)
+- [Demo](https://bibekamatya.github.io/bs-ad-calendar/)

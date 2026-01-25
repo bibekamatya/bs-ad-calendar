@@ -96,10 +96,10 @@ const CustomizationTab: React.FC<CustomizationTabProps> = ({
             color: '#111827' 
           }}
         >
-          {showCode === 'custom-live' ? 'Hide Code' : 'Show Code'}
+          Hide Code
         </button>
 
-        {showCode === 'custom-live' && (
+        {true && (
           <div style={{ position: 'relative', marginTop: '15px' }}>
             <pre style={{ 
               background: '#1f2937', 
