@@ -70,5 +70,14 @@ export const createPredefinedRanges = (): PredefinedRange[] => [
       }
       return { start: threeMonthsAgo, end: today }
     }
+  },
+  {
+    key: 'last180days',
+    label: 'Last 180 Days',
+    getValue: (calendarType) => {
+      const today = getTodayDate(calendarType)
+      const start = { ...today, day: today.day - 179 }
+      return { start, end: today }
+    }
   }
 ]

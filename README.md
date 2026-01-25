@@ -103,6 +103,7 @@ function App() {
 | `showNepaliDays` | `boolean` | `false` | Show Nepali day names |
 | `showNepaliNumbers` | `boolean` | `false` | Show Nepali numerals |
 | `showRangePresets` | `boolean` | `false` | Show range preset buttons |
+| `predefinedRanges` | `PredefinedRange[]` | - | Custom range presets (replaces defaults) |
 | `rangePresetsPosition` | `'top' \| 'left'` | `'top'` | Position of range presets |
 | `className` | `string` | - | Additional CSS class |
 
@@ -212,10 +213,18 @@ colors={{
   showRangePresets
   predefinedRanges={[
     {
-      label: 'This Month',
-      key: 'this-month',
+      label: 'Last 30 Days',
+      key: 'last-30-days',
       getValue: (type) => ({
         start: { year: 2081, month: 8, day: 1 },
+        end: { year: 2081, month: 8, day: 30 }
+      })
+    },
+    {
+      label: 'Last 180 Days',
+      key: 'last-180-days',
+      getValue: (type) => ({
+        start: { year: 2081, month: 2, day: 1 },
         end: { year: 2081, month: 8, day: 30 }
       })
     }
@@ -223,6 +232,8 @@ colors={{
   onRangeSelect={(range) => console.log(range)}
 />
 ```
+
+**Note:** Pass `predefinedRanges` to replace default presets. If not provided, default presets (Today, Yesterday, Last 7 Days, Last 30 Days, etc.) will be used.
 
 ## Keyboard Navigation
 
