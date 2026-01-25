@@ -2,7 +2,7 @@
 
 A modern, feature-rich React calendar component supporting both **Bikram Sambat (BS)** and **Gregorian (AD)** calendars with full TypeScript support.
 
-[![npm version](https://img.shields.io/npm/v/bs-ad-calendar.svg)](https://www.npmjs.com/package/bs-ad-calendar)
+[![npm version](https://img.shields.io/npm/v/bs-ad-calendar-react.svg)](https://www.npmjs.com/package/bs-ad-calendar-react)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
 ## Features
