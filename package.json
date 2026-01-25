@@ -1,6 +1,6 @@
 {
   "name": "bs-ad-calendar-react",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "description": "A modern React calendar component supporting both Bikram Sambat (BS) and Gregorian (AD) calendars",
   "type": "module",
