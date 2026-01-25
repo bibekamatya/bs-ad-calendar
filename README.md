@@ -13,13 +13,47 @@ A modern React calendar component for seamless conversion between **Bikram Samba
 
 **Select any date → Get both BS and AD dates automatically**
 
-When you click a date on either calendar, you instantly receive both the BS and AD equivalents with formatted output.
-
-**Example Output:**
 ```
-Input: Click on Poush 15, 2081 (BS Calendar)
+Input: Click Poush 15, 2081 (BS)
+Output: { bs: "2081-09-15", ad: "2024-12-31", formatted: {...} }
+```
 
-Output:
+## Features
+
+- Automatic dual calendar conversion
+- Single date and range selection
+- Customizable themes and colors
+- Nepali localization
+- Keyboard navigation
+- Responsive design
+- TypeScript support
+- Accessible (ARIA labels)
+
+## Installation
+
+```bash
+npm install bs-ad-calendar-react
+```
+
+## Examples
+
+### Basic Calendar
+
+```tsx
+import { Calendar } from 'bs-ad-calendar-react'
+
+export default function App() {
+  return (
+    <Calendar
+      calendarType="BS"
+      onDateSelect={(date) => console.log(date)}
+    />
+  )
+}
+```
+
+**Output:**
+```
 {
   bs: "2081-09-15",
   ad: "2024-12-31",
@@ -30,43 +64,44 @@ Output:
 }
 ```
 
-## Features
-
-- Automatic dual calendar conversion
-- Single date and range selection modes
-- Customizable themes (light/dark)
-- Nepali localization support
-- Full keyboard navigation
-- Responsive design
-- Complete TypeScript support
-- Accessible (ARIA labels)
-
-## Installation
-
-```bash
-npm install bs-ad-calendar-react
-```
-
-## Quick Start
-
-### Basic Usage
+### Range Selection
 
 ```tsx
-import { Calendar } from 'bs-ad-calendar-react'
+<Calendar
+  calendarType="BS"
+  mode="range"
+  showRangePresets
+  onRangeSelect={(range) => console.log(range)}
+/>
+```
 
-export default function App() {
-  return (
-    <Calendar
-      calendarType="BS"
-      onDateSelect={(date) => {
-        console.log(date.bs)           // "2081-09-15"
-        console.log(date.ad)           // "2024-12-31"
-        console.log(date.formatted.bs) // "Poush 15, 2081"
-        console.log(date.formatted.ad) // "December 31, 2024"
-      }}
-    />
-  )
+**Output:**
+```
+{
+  start: { year: 2081, month: 8, day: 1 },
+  end: { year: 2081, month: 8, day: 30 }
 }
+```
+
+### Custom Range Presets
+
+```tsx
+<Calendar
+  calendarType="BS"
+  mode="range"
+  showRangePresets
+  predefinedRanges={[
+    {
+      key: 'last-30-days',
+      label: 'Last 30 Days',
+      getValue: () => ({
+        start: { year: 2081, month: 8, day: 1 },
+        end: { year: 2081, month: 8, day: 30 }
+      })
+    }
+  ]}
+  onRangeSelect={(range) => console.log(range)}
+/>
 ```
 
 ### DatePicker Input
@@ -85,21 +120,61 @@ export default function App() {
 }
 ```
 
-### Range Selection
+### Nepali Localization
 
 ```tsx
-import { Calendar } from 'bs-ad-calendar-react'
+<Calendar
+  calendarType="BS"
+  showNepaliMonths
+  showNepaliDays
+  showNepaliNumbers
+  onDateSelect={(date) => console.log(date)}
+/>
+```
 
-export default function App() {
-  return (
-    <Calendar
-      calendarType="BS"
-      mode="range"
-      showRangePresets
-      onRangeSelect={(range) => console.log(range)}
-    />
-  )
-}
+### Custom Colors
+
+```tsx
+<Calendar
+  calendarType="BS"
+  colors={{
+    primary: '#10b981',
+    selected: '#059669',
+    today: '#d1fae5'
+  }}
+  onDateSelect={(date) => console.log(date)}
+/>
+```
+
+### Dark Theme
+
+```tsx
+<Calendar
+  calendarType="BS"
+  theme="dark"
+  onDateSelect={(date) => console.log(date)}
+/>
+```
+
+### Date Constraints
+
+```tsx
+<Calendar
+  calendarType="AD"
+  minDate="2024-01-01"
+  maxDate="2024-12-31"
+  onDateSelect={(date) => console.log(date)}
+/>
+```
+
+### Disabled State
+
+```tsx
+<Calendar
+  calendarType="BS"
+  disabled
+  onDateSelect={(date) => console.log(date)}
+/>
 ```
 
 ## API Reference
@@ -110,18 +185,19 @@ export default function App() {
 |------|------|---------|-------------|
 | `calendarType` | `'BS' \| 'AD'` | `'AD'` | Calendar type |
 | `mode` | `'single' \| 'range'` | `'single'` | Selection mode |
-| `onDateSelect` | `(date: DateOutput) => void` | - | Date selection callback |
-| `onRangeSelect` | `(range: DateRange) => void` | - | Range selection callback |
+| `onDateSelect` | `(date: DateOutput) => void` | - | Date callback |
+| `onRangeSelect` | `(range: DateRange) => void` | - | Range callback |
 | `showToday` | `boolean` | `true` | Highlight today |
 | `disabled` | `boolean` | `false` | Disable interaction |
 | `minDate` | `string` | - | Min selectable date |
 | `maxDate` | `string` | - | Max selectable date |
-| `theme` | `'light' \| 'dark'` | `'light'` | Theme variant |
+| `theme` | `'light' \| 'dark'` | `'light'` | Theme |
 | `colors` | `ColorConfig` | - | Custom colors |
-| `showNepaliMonths` | `boolean` | `false` | Nepali month names |
-| `showNepaliDays` | `boolean` | `false` | Nepali day names |
-| `showNepaliNumbers` | `boolean` | `false` | Nepali numerals |
-| `showRangePresets` | `boolean` | `false` | Show preset buttons |
+| `showNepaliMonths` | `boolean` | `false` | Nepali months |
+| `showNepaliDays` | `boolean` | `false` | Nepali days |
+| `showNepaliNumbers` | `boolean` | `false` | Nepali numbers |
+| `showRangePresets` | `boolean` | `false` | Show presets |
+| `predefinedRanges` | `PredefinedRange[]` | - | Custom presets |
 
 ### DatePicker Props
 
@@ -144,46 +220,6 @@ Extends Calendar props plus:
     ad: "December 31, 2024"
   }
 }
-```
-
-## Examples
-
-### Custom Theme
-
-```tsx
-<Calendar
-  calendarType="BS"
-  colors={{
-    primary: '#10b981',
-    selected: '#059669',
-    today: '#d1fae5'
-  }}
-  onDateSelect={(date) => console.log(date)}
-/>
-```
-
-### Nepali Localization
-
-```tsx
-<Calendar
-  calendarType="BS"
-  showNepaliMonths
-  showNepaliDays
-  showNepaliNumbers
-  onDateSelect={(date) => console.log(date)}
-/>
-```
-
-### Date Range
-
-```tsx
-<Calendar
-  calendarType="BS"
-  mode="range"
-  minDate="2024-01-01"
-  maxDate="2024-12-31"
-  onRangeSelect={(range) => console.log(range)}
-/>
 ```
 
 ## Keyboard Navigation
