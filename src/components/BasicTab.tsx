@@ -23,7 +23,16 @@ const BasicTab: React.FC<BasicTabProps> = ({
   renderOutput
 }) => {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))', gap: '20px', justifyContent: 'center', maxWidth: '1400px', margin: '0 auto' }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))',
+        gap: '20px',
+        justifyContent: 'center',
+        maxWidth: '1400px',
+        margin: '0 auto'
+      }}
+    >
       <ExampleCard
         title="BS Calendar"
         code={`<Calendar

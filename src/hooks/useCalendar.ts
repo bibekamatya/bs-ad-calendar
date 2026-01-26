@@ -4,7 +4,7 @@ import { getTodayDate, getDaysInMonth, getFirstDayOfMonth } from '../utils/dateU
 
 export const useCalendar = (calendarType: CalendarProps['calendarType'] = 'AD') => {
   const today = useMemo(() => getTodayDate(calendarType), [calendarType])
-  
+
   const [currentYear, setCurrentYear] = useState(today.year)
   const [currentMonth, setCurrentMonth] = useState(today.month)
   const [selectedDate, setSelectedDate] = useState<DateInfo | null>(null)
@@ -52,36 +52,42 @@ export const useCalendar = (calendarType: CalendarProps['calendarType'] = 'AD') 
   }
 
   const isToday = (day: number): boolean => {
-    return currentYear === today.year && 
-           currentMonth === today.month && 
-           day === today.day
+    return currentYear === today.year && currentMonth === today.month && day === today.day
   }
 
   const isSelected = (day: number, mode: CalendarProps['mode'] = 'single'): boolean => {
     if (mode === 'range') {
-      return !!(rangeStart &&
-                rangeStart.year === currentYear &&
-                rangeStart.month === currentMonth &&
-                rangeStart.day === day) ||
-             !!(rangeEnd &&
-                rangeEnd.year === currentYear &&
-                rangeEnd.month === currentMonth &&
-                rangeEnd.day === day)
+      return (
+        !!(
+          rangeStart &&
+          rangeStart.year === currentYear &&
+          rangeStart.month === currentMonth &&
+          rangeStart.day === day
+        ) ||
+        !!(
+          rangeEnd &&
+          rangeEnd.year === currentYear &&
+          rangeEnd.month === currentMonth &&
+          rangeEnd.day === day
+        )
+      )
     }
 
-    return !!(selectedDate &&
-              selectedDate.year === currentYear &&
-              selectedDate.month === currentMonth &&
-              selectedDate.day === day)
+    return !!(
+      selectedDate &&
+      selectedDate.year === currentYear &&
+      selectedDate.month === currentMonth &&
+      selectedDate.day === day
+    )
   }
 
   const isInRange = (day: number): boolean => {
     if (!rangeStart || !rangeEnd) return false
-    
+
     const currentTimestamp = new Date(currentYear, currentMonth, day).getTime()
     const startTimestamp = new Date(rangeStart.year, rangeStart.month, rangeStart.day).getTime()
     const endTimestamp = new Date(rangeEnd.year, rangeEnd.month, rangeEnd.day).getTime()
-    
+
     return currentTimestamp >= startTimestamp && currentTimestamp <= endTimestamp
   }
 
@@ -94,7 +100,7 @@ export const useCalendar = (calendarType: CalendarProps['calendarType'] = 'AD') 
     rangeEnd,
     today,
     calendarDays,
-    
+
     // Actions
     setCurrentYear,
     setCurrentMonth,
@@ -102,7 +108,7 @@ export const useCalendar = (calendarType: CalendarProps['calendarType'] = 'AD') 
     setRangeStart,
     setRangeEnd,
     navigateMonth,
-    
+
     // Helpers
     isToday,
     isSelected,

@@ -21,28 +21,22 @@ const MonthYearPicker: React.FC<MonthYearPickerProps> = ({
   onMonthChange,
   onClose,
   showNepaliNumbers = false,
-  convertToNepaliNumber = (n) => n.toString(),
+  convertToNepaliNumber = n => n.toString(),
   calendarType
 }) => {
-  const [yearRangeStart, setYearRangeStart] = useState(
-    Math.floor(currentYear / 12) * 12
-  )
+  const [yearRangeStart, setYearRangeStart] = useState(Math.floor(currentYear / 12) * 12)
 
   const minYear = calendarType === 'BS' ? 2000 : 1944
   const maxYear = calendarType === 'BS' ? 2100 : 2043
 
   return (
-    <div 
-      className={styles.pickerOverlay}
-      onClick={onClose}
-    >
-      <div 
-        className={styles.pickerContent}
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className={styles.pickerOverlay} onClick={onClose}>
+      <div className={styles.pickerContent} onClick={e => e.stopPropagation()}>
         <div className={styles.pickerHeader}>
           <h3>Select Month & Year</h3>
-          <button onClick={onClose} className={styles.closeButton}>×</button>
+          <button onClick={onClose} className={styles.closeButton}>
+            ×
+          </button>
         </div>
 
         <div className={styles.pickerBody}>
@@ -51,15 +45,24 @@ const MonthYearPicker: React.FC<MonthYearPickerProps> = ({
             <div className={styles.pickerSectionHeader}>
               <label>Year</label>
               <div className={styles.yearNav}>
-                <button 
+                <button
                   onClick={() => setYearRangeStart(Math.max(minYear, yearRangeStart - 12))}
                   disabled={yearRangeStart <= minYear}
-                >«</button>
-                <span>{showNepaliNumbers ? convertToNepaliNumber(yearRangeStart) : yearRangeStart} - {showNepaliNumbers ? convertToNepaliNumber(yearRangeStart + 11) : yearRangeStart + 11}</span>
-                <button 
+                >
+                  «
+                </button>
+                <span>
+                  {showNepaliNumbers ? convertToNepaliNumber(yearRangeStart) : yearRangeStart} -{' '}
+                  {showNepaliNumbers
+                    ? convertToNepaliNumber(yearRangeStart + 11)
+                    : yearRangeStart + 11}
+                </span>
+                <button
                   onClick={() => setYearRangeStart(Math.min(maxYear - 11, yearRangeStart + 12))}
                   disabled={yearRangeStart + 11 >= maxYear}
-                >»</button>
+                >
+                  »
+                </button>
               </div>
             </div>
             <div className={styles.yearGrid}>

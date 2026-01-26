@@ -31,14 +31,16 @@ export type CalendarProps = {
   mode?: 'single' | 'range'
   outputFormat?: 'iso' | 'object' | 'both'
   onDateSelect?: (data: DateOutput) => void
-  onRangeSelect?: (range: { start: DateInfo, end: DateInfo }) => void
+  onRangeSelect?: (range: { start: DateInfo; end: DateInfo }) => void
   showRangePresets?: boolean
   rangePresetsPosition?: 'top' | 'right' | 'bottom' | 'left'
   predefinedRanges?: PredefinedRange[]
   presetKeys?: string[]
   presetLabels?: Record<string, string>
   onPresetSelect?: (preset: PredefinedRange, range: DateRange) => void
-  renderPresets?: (props: { onRangeChange: (start: DateInfo, end: DateInfo) => void }) => React.ReactNode
+  renderPresets?: (props: {
+    onRangeChange: (start: DateInfo, end: DateInfo) => void
+  }) => React.ReactNode
   showNepaliMonths?: boolean
   showNepaliDays?: boolean
   showNepaliNumbers?: boolean

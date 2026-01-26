@@ -1,29 +1,53 @@
 export const NEPALI_MONTHS = [
-  'बैशाख', 'जेठ', 'आषाढ', 'श्रावण', 'भाद्र', 'आश्विन', 
-  'कार्तिक', 'मंसिर', 'पौष', 'माघ', 'फाल्गुन', 'चैत्र'
+  'बैशाख',
+  'जेठ',
+  'आषाढ',
+  'श्रावण',
+  'भाद्र',
+  'आश्विन',
+  'कार्तिक',
+  'मंसिर',
+  'पौष',
+  'माघ',
+  'फाल्गुन',
+  'चैत्र'
 ]
 
 export const ENGLISH_MONTHS_BS = [
-  'Baishakh', 'Jestha', 'Ashadh', 'Shrawan', 'Bhadra', 'Ashwin',
-  'Kartik', 'Mangsir', 'Poush', 'Magh', 'Falgun', 'Chaitra'
+  'Baishakh',
+  'Jestha',
+  'Ashadh',
+  'Shrawan',
+  'Bhadra',
+  'Ashwin',
+  'Kartik',
+  'Mangsir',
+  'Poush',
+  'Magh',
+  'Falgun',
+  'Chaitra'
 ]
 
 export const ENGLISH_MONTHS_AD = [
-  'January', 'February', 'March', 'April', 'May', 'June',
-  'July', 'August', 'September', 'October', 'November', 'December'
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December'
 ]
 
-export const NEPALI_DAYS = [
-  'आइत', 'सोम', 'मंगल', 'बुध', 'बिहि', 'शुक्र', 'शनि'
-]
+export const NEPALI_DAYS = ['आइत', 'सोम', 'मंगल', 'बुध', 'बिहि', 'शुक्र', 'शनि']
 
-export const ENGLISH_DAYS = [
-  'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'
-]
+export const ENGLISH_DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
-export const NEPALI_DIGITS = [
-  '०', '१', '२', '३', '४', '५', '६', '७', '८', '९'
-]
+export const NEPALI_DIGITS = ['०', '१', '२', '३', '४', '५', '६', '७', '८', '९']
 
 export const DEFAULT_COLORS = {
   light: {

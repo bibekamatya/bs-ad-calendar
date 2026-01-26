@@ -12,12 +12,21 @@ const AboutTab: React.FC = () => {
     <div className="space-y-8">
       <section>
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Core Feature</h2>
-        <div style={{ background: '#f0fdf4', border: '2px solid #10b981', padding: '16px', borderRadius: '8px', marginBottom: '16px' }}>
+        <div
+          style={{
+            background: '#f0fdf4',
+            border: '2px solid #10b981',
+            padding: '16px',
+            borderRadius: '8px',
+            marginBottom: '16px'
+          }}
+        >
           <p style={{ color: '#111827', fontSize: '16px', fontWeight: '600', margin: '0 0 8px 0' }}>
             Click any date on either BS or AD calendar and instantly get both calendar outputs
           </p>
           <p style={{ color: '#374151', margin: '0' }}>
-            When you select a date, you receive both the Bikram Sambat and Gregorian equivalents with formatted output.
+            When you select a date, you receive both the Bikram Sambat and Gregorian equivalents
+            with formatted output.
           </p>
         </div>
       </section>
@@ -25,7 +34,8 @@ const AboutTab: React.FC = () => {
       <section>
         <h2 className="text-2xl font-bold text-gray-900 mb-4">About BS-AD Calendar</h2>
         <p className="text-gray-600 mb-4">
-          A modern, feature-rich React calendar component supporting both Bikram Sambat (BS) and Gregorian (AD) calendars with full TypeScript support.
+          A modern, feature-rich React calendar component supporting both Bikram Sambat (BS) and
+          Gregorian (AD) calendars with full TypeScript support.
         </p>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
           <div className="bg-teal-50 p-4 rounded-lg">
@@ -58,7 +68,18 @@ const AboutTab: React.FC = () => {
       <section>
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Installation</h2>
         <div style={{ position: 'relative' }}>
-          <div style={{ background: '#1f2937', color: '#ffffff', padding: '16px', borderRadius: '8px', fontFamily: 'monospace', fontSize: '14px', overflow: 'auto', border: '1px solid #374151' }}>
+          <div
+            style={{
+              background: '#1f2937',
+              color: '#ffffff',
+              padding: '16px',
+              borderRadius: '8px',
+              fontFamily: 'monospace',
+              fontSize: '14px',
+              overflow: 'auto',
+              border: '1px solid #374151'
+            }}
+          >
             <div>$ npm install bs-ad-calendar-react</div>
           </div>
           <button
@@ -85,7 +106,18 @@ const AboutTab: React.FC = () => {
       <section>
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Quick Start</h2>
         <div style={{ position: 'relative' }}>
-          <div style={{ background: '#1f2937', color: '#ffffff', padding: '16px', borderRadius: '8px', fontFamily: 'monospace', fontSize: '14px', overflow: 'auto', border: '1px solid #374151' }}>
+          <div
+            style={{
+              background: '#1f2937',
+              color: '#ffffff',
+              padding: '16px',
+              borderRadius: '8px',
+              fontFamily: 'monospace',
+              fontSize: '14px',
+              overflow: 'auto',
+              border: '1px solid #374151'
+            }}
+          >
             <pre style={{ margin: 0 }}>{`import { Calendar } from 'bs-ad-calendar-react'
 
 function App() {
@@ -98,7 +130,9 @@ function App() {
 }`}</pre>
           </div>
           <button
-            onClick={() => copyCode(`import { Calendar } from 'bs-ad-calendar-react'
+            onClick={() =>
+              copyCode(
+                `import { Calendar } from 'bs-ad-calendar-react'
 
 function App() {
   return (
@@ -107,7 +141,10 @@ function App() {
       onDateSelect={(date) => console.log(date)}
     />
   )
-}`, 'quickstart')}
+}`,
+                'quickstart'
+              )
+            }
             style={{
               position: 'absolute',
               top: '8px',
@@ -130,13 +167,28 @@ function App() {
       <section>
         <h2 className="text-2xl font-bold text-gray-900 mb-4">Links</h2>
         <div className="space-y-2">
-          <a href="https://github.com/bibekamatya/bs-ad-calendar" target="_blank" rel="noopener noreferrer" className="block text-teal-600 hover:text-teal-700 font-medium">
+          <a
+            href="https://github.com/bibekamatya/bs-ad-calendar"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-teal-600 hover:text-teal-700 font-medium"
+          >
             → GitHub Repository
           </a>
-          <a href="https://www.npmjs.com/package/bs-ad-calendar-react" target="_blank" rel="noopener noreferrer" className="block text-teal-600 hover:text-teal-700 font-medium">
+          <a
+            href="https://www.npmjs.com/package/bs-ad-calendar-react"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-teal-600 hover:text-teal-700 font-medium"
+          >
             → NPM Package
           </a>
-          <a href="https://github.com/bibekamatya/bs-ad-calendar/issues" target="_blank" rel="noopener noreferrer" className="block text-teal-600 hover:text-teal-700 font-medium">
+          <a
+            href="https://github.com/bibekamatya/bs-ad-calendar/issues"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block text-teal-600 hover:text-teal-700 font-medium"
+          >
             → Report Issues
           </a>
         </div>

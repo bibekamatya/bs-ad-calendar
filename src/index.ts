@@ -17,7 +17,7 @@ export type {
 } from './types'
 
 // Utilities
-export { 
+export {
   convertToNepaliNumber,
   getDaysInMonth,
   getFirstDayOfMonth,

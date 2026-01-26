@@ -13,11 +13,22 @@ const Tabs: React.FC<TabsProps> = ({ tabs, activeTab, onTabChange }) => {
       <div className="md:hidden mb-4">
         <select
           value={activeTab}
-          onChange={(e) => onTabChange(e.target.value)}
-          style={{ width: '100%', padding: '10px', borderRadius: '8px', border: '1px solid #d1d5db', background: '#ffffff', color: '#111827', fontWeight: '500', fontSize: '14px' }}
+          onChange={e => onTabChange(e.target.value)}
+          style={{
+            width: '100%',
+            padding: '10px',
+            borderRadius: '8px',
+            border: '1px solid #d1d5db',
+            background: '#ffffff',
+            color: '#111827',
+            fontWeight: '500',
+            fontSize: '14px'
+          }}
         >
           {tabs.map(tab => (
-            <option key={tab.id} value={tab.id}>{tab.label}</option>
+            <option key={tab.id} value={tab.id}>
+              {tab.label}
+            </option>
           ))}
         </select>
       </div>

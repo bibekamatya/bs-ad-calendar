@@ -13,7 +13,9 @@
   cursor: pointer;
   background: var(--datepicker-background, white);
   color: var(--datepicker-text, #1f2937);
-  transition: border-color 0.2s, box-shadow 0.2s;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
   box-sizing: border-box;
 }
 

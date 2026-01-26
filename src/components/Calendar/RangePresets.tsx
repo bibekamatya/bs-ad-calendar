@@ -22,21 +22,23 @@ const RangePresets: React.FC<RangePresetsProps> = ({
   }
 
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: position === 'left' || position === 'right' ? 'column' : 'row',
-      flexWrap: position === 'top' || position === 'bottom' ? 'wrap' : 'nowrap',
-      gap: '8px',
-      marginBottom: position === 'top' ? '16px' : 0,
-      marginTop: position === 'bottom' ? '16px' : 0,
-      padding: '12px',
-      backgroundColor: '#f8f9fa',
-      borderRadius: '6px',
-      border: '1px solid #e9ecef',
-      minWidth: position === 'left' || position === 'right' ? '150px' : 'auto',
-      maxWidth: position === 'left' || position === 'right' ? '180px' : 'none',
-      flexShrink: 0
-    }}>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: position === 'left' || position === 'right' ? 'column' : 'row',
+        flexWrap: position === 'top' || position === 'bottom' ? 'wrap' : 'nowrap',
+        gap: '8px',
+        marginBottom: position === 'top' ? '16px' : 0,
+        marginTop: position === 'bottom' ? '16px' : 0,
+        padding: '12px',
+        backgroundColor: '#f8f9fa',
+        borderRadius: '6px',
+        border: '1px solid #e9ecef',
+        minWidth: position === 'left' || position === 'right' ? '150px' : 'auto',
+        maxWidth: position === 'left' || position === 'right' ? '180px' : 'none',
+        flexShrink: 0
+      }}
+    >
       {presets.map(preset => (
         <button
           key={preset.key}

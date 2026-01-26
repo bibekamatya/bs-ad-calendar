@@ -25,7 +25,7 @@ const CalendarHeader: React.FC<ExtendedCalendarHeaderProps> = ({
 
   return (
     <div className={styles.header}>
-      <button 
+      <button
         className={styles.navButton}
         onClick={() => onNavigateMonth(-12)}
         disabled={disabled}
@@ -34,7 +34,7 @@ const CalendarHeader: React.FC<ExtendedCalendarHeaderProps> = ({
       >
         «
       </button>
-      <button 
+      <button
         className={styles.navButton}
         onClick={() => onNavigateMonth(-1)}
         disabled={disabled}
@@ -42,14 +42,11 @@ const CalendarHeader: React.FC<ExtendedCalendarHeaderProps> = ({
       >
         ‹
       </button>
-      <button 
-        className={styles.monthYear}
-        onClick={() => setShowPicker(true)}
-        disabled={disabled}
-      >
-        {months[currentMonth]} {showNepaliNumbers ? convertToNepaliNumber(currentYear) : currentYear}
+      <button className={styles.monthYear} onClick={() => setShowPicker(true)} disabled={disabled}>
+        {months[currentMonth]}{' '}
+        {showNepaliNumbers ? convertToNepaliNumber(currentYear) : currentYear}
       </button>
-      <button 
+      <button
         className={styles.navButton}
         onClick={() => onNavigateMonth(1)}
         disabled={disabled}
@@ -57,7 +54,7 @@ const CalendarHeader: React.FC<ExtendedCalendarHeaderProps> = ({
       >
         ›
       </button>
-      <button 
+      <button
         className={styles.navButton}
         onClick={() => onNavigateMonth(12)}
         disabled={disabled}

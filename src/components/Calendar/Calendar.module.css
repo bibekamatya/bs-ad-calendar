@@ -4,7 +4,10 @@
   border-radius: 8px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   padding: 16px;
-  font-family: system-ui, -apple-system, sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    sans-serif;
   color: var(--calendar-text, #1f2937);
 }
 
@@ -298,7 +301,7 @@
 }
 
 /* Dark theme support */
-.calendar[data-theme="dark"] {
+.calendar[data-theme='dark'] {
   --calendar-primary: #60a5fa;
   --calendar-background: #1f2937;
   --calendar-text: #f9fafb;

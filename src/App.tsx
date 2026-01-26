@@ -34,10 +34,25 @@ function App() {
     if (!output) return null
     const date = JSON.parse(output)
     return (
-      <div style={{ background: '#f3f4f6', padding: '12px', borderRadius: '4px', fontSize: '13px', marginTop: '10px', color: '#111827' }}>
-        <div><strong>BS:</strong> {date.bs}</div>
-        <div><strong>AD:</strong> {date.ad}</div>
-        <div style={{ marginTop: '8px' }}><strong>Formatted:</strong></div>
+      <div
+        style={{
+          background: '#f3f4f6',
+          padding: '12px',
+          borderRadius: '4px',
+          fontSize: '13px',
+          marginTop: '10px',
+          color: '#111827'
+        }}
+      >
+        <div>
+          <strong>BS:</strong> {date.bs}
+        </div>
+        <div>
+          <strong>AD:</strong> {date.ad}
+        </div>
+        <div style={{ marginTop: '8px' }}>
+          <strong>Formatted:</strong>
+        </div>
         <div style={{ marginLeft: '10px' }}>BS: {date.formatted.bs}</div>
         <div style={{ marginLeft: '10px' }}>AD: {date.formatted.ad}</div>
       </div>
@@ -48,9 +63,25 @@ function App() {
     if (!output) return null
     const range = JSON.parse(output)
     return (
-      <div style={{ background: '#f3f4f6', padding: '12px', borderRadius: '4px', fontSize: '13px', marginTop: '10px', color: '#111827' }}>
-        <div><strong>Start:</strong> {range.start?.year}-{String(range.start?.month + 1).padStart(2, '0')}-{String(range.start?.day).padStart(2, '0')}</div>
-        <div><strong>End:</strong> {range.end?.year}-{String(range.end?.month + 1).padStart(2, '0')}-{String(range.end?.day).padStart(2, '0')}</div>
+      <div
+        style={{
+          background: '#f3f4f6',
+          padding: '12px',
+          borderRadius: '4px',
+          fontSize: '13px',
+          marginTop: '10px',
+          color: '#111827'
+        }}
+      >
+        <div>
+          <strong>Start:</strong> {range.start?.year}-
+          {String(range.start?.month + 1).padStart(2, '0')}-
+          {String(range.start?.day).padStart(2, '0')}
+        </div>
+        <div>
+          <strong>End:</strong> {range.end?.year}-{String(range.end?.month + 1).padStart(2, '0')}-
+          {String(range.end?.day).padStart(2, '0')}
+        </div>
       </div>
     )
   }
@@ -61,7 +92,10 @@ function App() {
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
           <h1 className="text-3xl font-bold text-gray-900 mb-1">BS-AD Calendar</h1>
-          <p className="text-gray-600 text-sm">Modern React calendar component supporting Bikram Sambat (BS) and Gregorian (AD) calendars</p>
+          <p className="text-gray-600 text-sm">
+            Modern React calendar component supporting Bikram Sambat (BS) and Gregorian (AD)
+            calendars
+          </p>
         </div>
       </div>
 
@@ -80,21 +114,20 @@ function App() {
                 { id: 'customization', label: 'Customization' }
               ]}
               activeTab={activeTab}
-              onTabChange={(tabId) => setActiveTab(tabId as TabType)}
+              onTabChange={tabId => setActiveTab(tabId as TabType)}
             />
           </div>
 
           {/* Content */}
           <div className="flex-1 bg-white md:rounded-xl md:shadow-md md:p-8 animate-fadeIn md:ml-56">
-
             {activeTab === 'about' && <AboutTab />}
 
             {activeTab === 'basic' && (
               <BasicTab
                 outputAD={outputs.ad1 || ''}
                 outputBS={outputs.bs1 || ''}
-                onADSelect={(date) => handleOutput('ad1', date)}
-                onBSSelect={(date) => handleOutput('bs1', date)}
+                onADSelect={date => handleOutput('ad1', date)}
+                onBSSelect={date => handleOutput('bs1', date)}
                 copied={copied}
                 onCopyCode={copyCode}
                 renderOutput={renderOutput}
@@ -105,8 +138,8 @@ function App() {
               <LocalizationTab
                 outputAD={outputs.ad2 || ''}
                 outputBS={outputs.bs2 || ''}
-                onADSelect={(date) => handleOutput('ad2', date)}
-                onBSSelect={(date) => handleOutput('bs2', date)}
+                onADSelect={date => handleOutput('ad2', date)}
+                onBSSelect={date => handleOutput('bs2', date)}
                 copied={copied}
                 onCopyCode={copyCode}
                 renderOutput={renderOutput}
@@ -117,8 +150,8 @@ function App() {
               <RangeTab
                 outputAD={outputs.ad3 || ''}
                 outputBS={outputs.bs3 || ''}
-                onADSelect={(range) => handleRangeOutput('ad3', range)}
-                onBSSelect={(range) => handleRangeOutput('bs3', range)}
+                onADSelect={range => handleRangeOutput('ad3', range)}
+                onBSSelect={range => handleRangeOutput('bs3', range)}
                 copied={copied}
                 onCopyCode={copyCode}
                 renderRangeOutput={renderRangeOutput}
@@ -128,7 +161,7 @@ function App() {
             {activeTab === 'customization' && (
               <CustomizationTab
                 outputAD={outputs.ad5 || ''}
-                onADSelect={(date) => handleOutput('ad5', date)}
+                onADSelect={date => handleOutput('ad5', date)}
                 copied={copied}
                 onCopyCode={copyCode}
                 renderOutput={renderOutput}
@@ -139,8 +172,8 @@ function App() {
               <CalendarInputTab
                 outputAD={outputs.ad6 || ''}
                 outputBS={outputs.bs6 || ''}
-                onADSelect={(date) => handleOutput('ad6', date)}
-                onBSSelect={(date) => handleOutput('bs6', date)}
+                onADSelect={date => handleOutput('ad6', date)}
+                onBSSelect={date => handleOutput('bs6', date)}
                 copied={copied}
                 onCopyCode={copyCode}
                 renderOutput={renderOutput}

@@ -9,9 +9,17 @@ export const addDays = (date: DateInfo, days: number, calendarType: 'BS' | 'AD')
   if (calendarType === 'BS') {
     try {
       const bsDate = new NepaliDate(date.year, date.month, date.day)
-      const adDate = new Date(bsDate.getEnglishYear(), bsDate.getEnglishMonth(), bsDate.getEnglishDate())
+      const adDate = new Date(
+        bsDate.getEnglishYear(),
+        bsDate.getEnglishMonth(),
+        bsDate.getEnglishDate()
+      )
       adDate.setDate(adDate.getDate() + days)
-      const newBsDate = NepaliDate.fromEnglishDate(adDate.getFullYear(), adDate.getMonth(), adDate.getDate())
+      const newBsDate = NepaliDate.fromEnglishDate(
+        adDate.getFullYear(),
+        adDate.getMonth(),
+        adDate.getDate()
+      )
       return { year: newBsDate.getYear(), month: newBsDate.getMonth(), day: newBsDate.getDate() }
     } catch {
       return date
@@ -31,7 +39,7 @@ export const addMonths = (date: DateInfo, months: number, calendarType: 'BS' | '
     try {
       let newYear = date.year
       let newMonth = date.month + months
-      
+
       while (newMonth < 0) {
         newYear -= 1
         newMonth += 12
@@ -40,10 +48,10 @@ export const addMonths = (date: DateInfo, months: number, calendarType: 'BS' | '
         newYear += 1
         newMonth -= 12
       }
-      
+
       const daysInNewMonth = getDaysInMonth('BS', newYear, newMonth)
       const newDay = Math.min(date.day, daysInNewMonth)
-      
+
       return { year: newYear, month: newMonth, day: newDay }
     } catch {
       return date

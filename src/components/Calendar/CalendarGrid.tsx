@@ -25,16 +25,22 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
 
       {/* Calendar days */}
       {calendarDays.map((day, index) => {
-        const dayDisabled = day ? (isDisabled?.(day) || disabled) : false
+        const dayDisabled = day ? isDisabled?.(day) || disabled : false
         return (
           <div
             key={index}
             className={`${styles.day} ${
-              day === null ? styles.dayOtherMonth :
-              dayDisabled ? styles.dayDisabled :
-              isSelected(day) ? styles.daySelected :
-              isInRange(day) ? styles.dayInRange :
-              isToday(day) ? styles.dayToday : ''
+              day === null
+                ? styles.dayOtherMonth
+                : dayDisabled
+                  ? styles.dayDisabled
+                  : isSelected(day)
+                    ? styles.daySelected
+                    : isInRange(day)
+                      ? styles.dayInRange
+                      : isToday(day)
+                        ? styles.dayToday
+                        : ''
             }`}
             onClick={() => day && !dayDisabled && onDateSelect(day)}
           >

@@ -23,7 +23,16 @@ const LocalizationTab: React.FC<LocalizationTabProps> = ({
   renderOutput
 }) => {
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))', gap: '20px', justifyContent: 'center', maxWidth: '1400px', margin: '0 auto' }}>
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))',
+        gap: '20px',
+        justifyContent: 'center',
+        maxWidth: '1400px',
+        margin: '0 auto'
+      }}
+    >
       <ExampleCard
         title="BS - Full Nepali"
         code={`<Calendar
@@ -38,7 +47,13 @@ const LocalizationTab: React.FC<LocalizationTabProps> = ({
         onCopyCode={onCopyCode}
         output={renderOutput(outputBS)}
       >
-        <Calendar calendarType="BS" showNepaliMonths={true} showNepaliDays={true} showNepaliNumbers={true} onDateSelect={onBSSelect} />
+        <Calendar
+          calendarType="BS"
+          showNepaliMonths={true}
+          showNepaliDays={true}
+          showNepaliNumbers={true}
+          onDateSelect={onBSSelect}
+        />
       </ExampleCard>
 
       <ExampleCard
