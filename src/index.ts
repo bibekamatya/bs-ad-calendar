@@ -26,7 +26,7 @@ export {
   isDateInRange
 } from './utils/dateUtils'
 
-export { createPredefinedRanges } from './utils/rangePresets'
+export { createPredefinedRanges, PRESET_KEYS } from './utils/rangePresets'
 
 // Constants
 export {

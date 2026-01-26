@@ -33,8 +33,10 @@ export type CalendarProps = {
   onDateSelect?: (data: DateOutput) => void
   onRangeSelect?: (range: { start: DateInfo, end: DateInfo }) => void
   showRangePresets?: boolean
-  rangePresetsPosition?: 'top' | 'left'
+  rangePresetsPosition?: 'top' | 'right' | 'bottom' | 'left'
   predefinedRanges?: PredefinedRange[]
+  presetKeys?: string[]
+  presetLabels?: Record<string, string>
   onPresetSelect?: (preset: PredefinedRange, range: DateRange) => void
   renderPresets?: (props: { onRangeChange: (start: DateInfo, end: DateInfo) => void }) => React.ReactNode
   showNepaliMonths?: boolean

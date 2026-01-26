@@ -83,23 +83,45 @@ export default function App() {
 }
 ```
 
-### Custom Range Presets
+### Range Presets with Filtering
 
 ```tsx
+import { Calendar, PRESET_KEYS } from 'bs-ad-calendar-react'
+
 <Calendar
   calendarType="BS"
   mode="range"
   showRangePresets
-  predefinedRanges={[
-    {
-      key: 'last-30-days',
-      label: 'Last 30 Days',
-      getValue: () => ({
-        start: { year: 2081, month: 8, day: 1 },
-        end: { year: 2081, month: 8, day: 30 }
-      })
-    }
+  rangePresetsPosition="left"
+  presetKeys={[
+    PRESET_KEYS.LAST_7_DAYS,
+    PRESET_KEYS.LAST_30_DAYS,
+    PRESET_KEYS.THIS_MONTH,
+    PRESET_KEYS.LAST_MONTH
   ]}
+  onRangeSelect={(range) => console.log(range)}
+/>
+```
+
+### Custom Preset Labels
+
+```tsx
+import { Calendar, PRESET_KEYS } from 'bs-ad-calendar-react'
+
+<Calendar
+  calendarType="AD"
+  mode="range"
+  showRangePresets
+  presetKeys={[
+    PRESET_KEYS.LAST_7_DAYS,
+    PRESET_KEYS.LAST_30_DAYS,
+    PRESET_KEYS.THIS_MONTH
+  ]}
+  presetLabels={{
+    [PRESET_KEYS.LAST_7_DAYS]: 'Past Week',
+    [PRESET_KEYS.LAST_30_DAYS]: 'Past Month',
+    [PRESET_KEYS.THIS_MONTH]: 'Current Month'
+  }}
   onRangeSelect={(range) => console.log(range)}
 />
 ```
@@ -197,6 +219,9 @@ export default function App() {
 | `showNepaliDays` | `boolean` | `false` | Nepali days |
 | `showNepaliNumbers` | `boolean` | `false` | Nepali numbers |
 | `showRangePresets` | `boolean` | `false` | Show presets |
+| `rangePresetsPosition` | `'top' \| 'right' \| 'bottom' \| 'left'` | `'top'` | Preset position |
+| `presetKeys` | `string[]` | - | Filter presets |
+| `presetLabels` | `Record<string, string>` | - | Rename presets |
 | `predefinedRanges` | `PredefinedRange[]` | - | Custom presets |
 
 ### DatePicker Props
@@ -237,6 +262,24 @@ Chrome, Firefox, Safari, Edge (latest versions)
 
 ```tsx
 import type { DateOutput, DateRange, CalendarProps } from 'bs-ad-calendar-react'
+import { PRESET_KEYS } from 'bs-ad-calendar-react'
+```
+
+## Available Preset Keys
+
+```tsx
+PRESET_KEYS.TODAY           // Today
+PRESET_KEYS.YESTERDAY       // Yesterday
+PRESET_KEYS.THIS_WEEK       // This Week
+PRESET_KEYS.LAST_7_DAYS     // Last 7 Days
+PRESET_KEYS.LAST_30_DAYS    // Last 30 Days
+PRESET_KEYS.THIS_MONTH      // This Month
+PRESET_KEYS.LAST_MONTH      // Last Month
+PRESET_KEYS.LAST_3_MONTHS   // Last 3 Months
+PRESET_KEYS.LAST_6_MONTHS   // Last 6 Months
+PRESET_KEYS.LAST_9_MONTHS   // Last 9 Months
+PRESET_KEYS.LAST_180_DAYS   // Last 180 Days
+PRESET_KEYS.LAST_YEAR       // Last Year (12 months)
 ```
 
 ## License

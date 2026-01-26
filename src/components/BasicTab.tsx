@@ -25,20 +25,6 @@ const BasicTab: React.FC<BasicTabProps> = ({
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))', gap: '20px', justifyContent: 'center', maxWidth: '1400px', margin: '0 auto' }}>
       <ExampleCard
-        title="AD Calendar"
-        code={`<Calendar
-  calendarType="AD"
-  onDateSelect={(date) => console.log(date)}
-/>`}
-        codeId="basic-ad"
-        copied={copied}
-        onCopyCode={onCopyCode}
-        output={renderOutput(outputAD)}
-      >
-        <Calendar calendarType="AD" onDateSelect={onADSelect} />
-      </ExampleCard>
-
-      <ExampleCard
         title="BS Calendar"
         code={`<Calendar
   calendarType="BS"
@@ -50,6 +36,20 @@ const BasicTab: React.FC<BasicTabProps> = ({
         output={renderOutput(outputBS)}
       >
         <Calendar calendarType="BS" onDateSelect={onBSSelect} />
+      </ExampleCard>
+
+      <ExampleCard
+        title="AD Calendar"
+        code={`<Calendar
+  calendarType="AD"
+  onDateSelect={(date) => console.log(date)}
+/>`}
+        codeId="basic-ad"
+        copied={copied}
+        onCopyCode={onCopyCode}
+        output={renderOutput(outputAD)}
+      >
+        <Calendar calendarType="AD" onDateSelect={onADSelect} />
       </ExampleCard>
     </div>
   )

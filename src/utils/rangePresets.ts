@@ -1,7 +1,24 @@
 import type { PredefinedRange } from '../types/index.js'
 import { getTodayDate } from './dateUtils'
+import { addDays, addMonths, getFirstDayOfMonth, getStartOfWeek } from './bsDateHelpers'
 
-export const createPredefinedRanges = (): PredefinedRange[] => [
+export const PRESET_KEYS = {
+  TODAY: 'today',
+  YESTERDAY: 'yesterday',
+  THIS_WEEK: 'thisWeek',
+  LAST_7_DAYS: 'last7days',
+  LAST_30_DAYS: 'last30days',
+  THIS_MONTH: 'thisMonth',
+  LAST_MONTH: 'lastMonth',
+  LAST_3_MONTHS: 'last3months',
+  LAST_6_MONTHS: 'last6months',
+  LAST_180_DAYS: 'last180days',
+  LAST_9_MONTHS: 'last9months',
+  LAST_YEAR: 'lastYear'
+} as const
+
+export const createPredefinedRanges = (keys?: string[], labels?: Record<string, string>): PredefinedRange[] => {
+  const allPresets: PredefinedRange[] = [
   {
     key: 'today',
     label: 'Today',
@@ -15,8 +32,17 @@ export const createPredefinedRanges = (): PredefinedRange[] => [
     label: 'Yesterday',
     getValue: (calendarType) => {
       const today = getTodayDate(calendarType)
-      const yesterday = { ...today, day: today.day - 1 }
+      const yesterday = addDays(today, -1, calendarType)
       return { start: yesterday, end: yesterday }
+    }
+  },
+  {
+    key: 'thisWeek',
+    label: 'This Week',
+    getValue: (calendarType) => {
+      const today = getTodayDate(calendarType)
+      const start = getStartOfWeek(today, calendarType)
+      return { start, end: today }
     }
   },
   {
@@ -24,7 +50,7 @@ export const createPredefinedRanges = (): PredefinedRange[] => [
     label: 'Last 7 Days',
     getValue: (calendarType) => {
       const today = getTodayDate(calendarType)
-      const start = { ...today, day: today.day - 6 }
+      const start = addDays(today, -6, calendarType)
       return { start, end: today }
     }
   },
@@ -33,7 +59,7 @@ export const createPredefinedRanges = (): PredefinedRange[] => [
     label: 'Last 30 Days',
     getValue: (calendarType) => {
       const today = getTodayDate(calendarType)
-      const start = { ...today, day: today.day - 29 }
+      const start = addDays(today, -29, calendarType)
       return { start, end: today }
     }
   },
@@ -42,7 +68,7 @@ export const createPredefinedRanges = (): PredefinedRange[] => [
     label: 'This Month',
     getValue: (calendarType) => {
       const today = getTodayDate(calendarType)
-      const start = { ...today, day: 1 }
+      const start = getFirstDayOfMonth(today)
       return { start, end: today }
     }
   },
@@ -51,11 +77,9 @@ export const createPredefinedRanges = (): PredefinedRange[] => [
     label: 'Last Month',
     getValue: (calendarType) => {
       const today = getTodayDate(calendarType)
-      const lastMonth = today.month === 0 ? 11 : today.month - 1
-      const lastMonthYear = today.month === 0 ? today.year - 1 : today.year
-      const start = { year: lastMonthYear, month: lastMonth, day: 1 }
-      const end = { year: lastMonthYear, month: lastMonth, day: 30 } // Simplified
-      return { start, end }
+      const lastMonthEnd = addDays(getFirstDayOfMonth(today), -1, calendarType)
+      const start = getFirstDayOfMonth(lastMonthEnd)
+      return { start, end: lastMonthEnd }
     }
   },
   {
@@ -63,12 +87,19 @@ export const createPredefinedRanges = (): PredefinedRange[] => [
     label: 'Last 3 Months',
     getValue: (calendarType) => {
       const today = getTodayDate(calendarType)
-      const threeMonthsAgo = {
-        year: today.month < 3 ? today.year - 1 : today.year,
-        month: today.month < 3 ? today.month + 9 : today.month - 3,
-        day: 1
-      }
-      return { start: threeMonthsAgo, end: today }
+      const threeMonthsAgo = addMonths(today, -2, calendarType)
+      const start = getFirstDayOfMonth(threeMonthsAgo)
+      return { start, end: today }
+    }
+  },
+  {
+    key: 'last6months',
+    label: 'Last 6 Months',
+    getValue: (calendarType) => {
+      const today = getTodayDate(calendarType)
+      const sixMonthsAgo = addMonths(today, -5, calendarType)
+      const start = getFirstDayOfMonth(sixMonthsAgo)
+      return { start, end: today }
     }
   },
   {
@@ -76,8 +107,35 @@ export const createPredefinedRanges = (): PredefinedRange[] => [
     label: 'Last 180 Days',
     getValue: (calendarType) => {
       const today = getTodayDate(calendarType)
-      const start = { ...today, day: today.day - 179 }
+      const start = addDays(today, -179, calendarType)
+      return { start, end: today }
+    }
+  },
+  {
+    key: 'last9months',
+    label: 'Last 9 Months',
+    getValue: (calendarType) => {
+      const today = getTodayDate(calendarType)
+      const nineMonthsAgo = addMonths(today, -8, calendarType)
+      const start = getFirstDayOfMonth(nineMonthsAgo)
+      return { start, end: today }
+    }
+  },
+  {
+    key: 'lastYear',
+    label: 'Last Year',
+    getValue: (calendarType) => {
+      const today = getTodayDate(calendarType)
+      const lastYear = addMonths(today, -11, calendarType)
+      const start = getFirstDayOfMonth(lastYear)
       return { start, end: today }
     }
   }
 ]
+
+  const filtered = keys ? allPresets.filter(preset => keys.includes(preset.key)) : allPresets
+  
+  return labels 
+    ? filtered.map(preset => ({ ...preset, label: labels[preset.key] || preset.label }))
+    : filtered
+}

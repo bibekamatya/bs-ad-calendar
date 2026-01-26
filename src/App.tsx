@@ -56,7 +56,7 @@ function App() {
   }
 
   return (
-    <div className="bg-gradient-to-br from-gray-50 via-gray-50 to-gray-100 min-h-screen">
+    <div className="bg-linear-to-br from-gray-50 via-gray-50 to-gray-100 min-h-screen">
       {/* Header */}
       <div className="bg-white border-b border-gray-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 text-center">
@@ -87,65 +87,65 @@ function App() {
           {/* Content */}
           <div className="flex-1 bg-white md:rounded-xl md:shadow-md md:p-8 animate-fadeIn md:ml-56">
 
-      {activeTab === 'about' && <AboutTab />}
+            {activeTab === 'about' && <AboutTab />}
 
-      {activeTab === 'basic' && (
-        <BasicTab
-          outputAD={outputs.ad1 || ''}
-          outputBS={outputs.bs1 || ''}
-          onADSelect={(date) => handleOutput('ad1', date)}
-          onBSSelect={(date) => handleOutput('bs1', date)}
-          copied={copied}
-          onCopyCode={copyCode}
-          renderOutput={renderOutput}
-        />
-      )}
+            {activeTab === 'basic' && (
+              <BasicTab
+                outputAD={outputs.ad1 || ''}
+                outputBS={outputs.bs1 || ''}
+                onADSelect={(date) => handleOutput('ad1', date)}
+                onBSSelect={(date) => handleOutput('bs1', date)}
+                copied={copied}
+                onCopyCode={copyCode}
+                renderOutput={renderOutput}
+              />
+            )}
 
-      {activeTab === 'localization' && (
-        <LocalizationTab
-          outputAD={outputs.ad2 || ''}
-          outputBS={outputs.bs2 || ''}
-          onADSelect={(date) => handleOutput('ad2', date)}
-          onBSSelect={(date) => handleOutput('bs2', date)}
-          copied={copied}
-          onCopyCode={copyCode}
-          renderOutput={renderOutput}
-        />
-      )}
+            {activeTab === 'localization' && (
+              <LocalizationTab
+                outputAD={outputs.ad2 || ''}
+                outputBS={outputs.bs2 || ''}
+                onADSelect={(date) => handleOutput('ad2', date)}
+                onBSSelect={(date) => handleOutput('bs2', date)}
+                copied={copied}
+                onCopyCode={copyCode}
+                renderOutput={renderOutput}
+              />
+            )}
 
-      {activeTab === 'range' && (
-        <RangeTab
-          outputAD={outputs.ad3 || ''}
-          outputBS={outputs.bs3 || ''}
-          onADSelect={(range) => handleRangeOutput('ad3', range)}
-          onBSSelect={(range) => handleRangeOutput('bs3', range)}
-          copied={copied}
-          onCopyCode={copyCode}
-          renderRangeOutput={renderRangeOutput}
-        />
-      )}
+            {activeTab === 'range' && (
+              <RangeTab
+                outputAD={outputs.ad3 || ''}
+                outputBS={outputs.bs3 || ''}
+                onADSelect={(range) => handleRangeOutput('ad3', range)}
+                onBSSelect={(range) => handleRangeOutput('bs3', range)}
+                copied={copied}
+                onCopyCode={copyCode}
+                renderRangeOutput={renderRangeOutput}
+              />
+            )}
 
-      {activeTab === 'customization' && (
-        <CustomizationTab
-          outputAD={outputs.ad5 || ''}
-          onADSelect={(date) => handleOutput('ad5', date)}
-          copied={copied}
-          onCopyCode={copyCode}
-          renderOutput={renderOutput}
-        />
-      )}
+            {activeTab === 'customization' && (
+              <CustomizationTab
+                outputAD={outputs.ad5 || ''}
+                onADSelect={(date) => handleOutput('ad5', date)}
+                copied={copied}
+                onCopyCode={copyCode}
+                renderOutput={renderOutput}
+              />
+            )}
 
-      {activeTab === 'calendarinput' && (
-        <CalendarInputTab
-          outputAD={outputs.ad6 || ''}
-          outputBS={outputs.bs6 || ''}
-          onADSelect={(date) => handleOutput('ad6', date)}
-          onBSSelect={(date) => handleOutput('bs6', date)}
-          copied={copied}
-          onCopyCode={copyCode}
-          renderOutput={renderOutput}
-        />
-      )}
+            {activeTab === 'calendarinput' && (
+              <CalendarInputTab
+                outputAD={outputs.ad6 || ''}
+                outputBS={outputs.bs6 || ''}
+                onADSelect={(date) => handleOutput('ad6', date)}
+                onBSSelect={(date) => handleOutput('bs6', date)}
+                copied={copied}
+                onCopyCode={copyCode}
+                renderOutput={renderOutput}
+              />
+            )}
           </div>
         </div>
       </div>

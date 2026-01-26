@@ -29,7 +29,7 @@ const CustomizationTab: React.FC<CustomizationTabProps> = ({
   }
 
   const code = `<Calendar
-  calendarType="AD"
+  calendarType="BS"
   colors={{
     primary: '${colors.primary}',
     selected: '${colors.selected}',
@@ -70,7 +70,7 @@ const CustomizationTab: React.FC<CustomizationTabProps> = ({
 
           <div>
             <Calendar 
-              calendarType="AD" 
+              calendarType="BS" 
               colors={colors}
               onDateSelect={onADSelect} 
             />

@@ -29,6 +29,8 @@ const Calendar: React.FC<CalendarProps> = ({
   showRangePresets = false,
   rangePresetsPosition = 'top',
   predefinedRanges,
+  presetKeys,
+  presetLabels,
   onPresetSelect,
   renderPresets,
   showNepaliMonths = false,
@@ -42,10 +44,8 @@ const Calendar: React.FC<CalendarProps> = ({
   const {
     currentYear,
     currentMonth,
-    selectedDate: _selectedDate,
     rangeStart,
     rangeEnd,
-    today: _today,
     calendarDays,
     setSelectedDate,
     setRangeStart,
@@ -59,8 +59,7 @@ const Calendar: React.FC<CalendarProps> = ({
   } = useCalendar(calendarType)
 
   const [activePreset, setActivePreset] = useState<string | undefined>()
-  const defaultPresets = createPredefinedRanges()
-  const rangePresets = predefinedRanges || defaultPresets
+  const rangePresets = predefinedRanges || createPredefinedRanges(presetKeys, presetLabels)
 
   // Get localized strings
   const months = (calendarType === 'BS' && showNepaliMonths) 
@@ -73,10 +72,12 @@ const Calendar: React.FC<CalendarProps> = ({
     ? NEPALI_DAYS
     : ENGLISH_DAYS
 
-  const handlePresetSelect = (preset: any, range: any) => {
+  const handlePresetSelect = (preset: PredefinedRange, range: DateRange) => {
     if (range.start && range.end) {
       setRangeStart(range.start)
       setRangeEnd(range.end)
+      setCurrentYear(range.start.year)
+      setCurrentMonth(range.start.month)
       setActivePreset(preset.key)
       onPresetSelect?.(preset, range)
       onRangeSelect?.(range)
@@ -96,7 +97,7 @@ const Calendar: React.FC<CalendarProps> = ({
     const newDate = { year: currentYear, month: currentMonth, day }
     
     // Check if date is disabled by min/max constraints
-    if (isDateDisabled(newDate, minDate, maxDate, calendarType)) return
+    if (isDateDisabled(newDate, minDate, maxDate)) return
 
     if (mode === 'range') {
       setActivePreset(undefined) // Clear preset when manually selecting
@@ -214,7 +215,7 @@ const Calendar: React.FC<CalendarProps> = ({
               isSelected={(day) => isSelected(day, mode)}
               isInRange={isInRange}
               isToday={(day) => showToday && isToday(day)}
-              isDisabled={(day) => isDateDisabled({ year: currentYear, month: currentMonth, day }, minDate, maxDate, calendarType)}
+              isDisabled={(day) => isDateDisabled({ year: currentYear, month: currentMonth, day }, minDate, maxDate)}
               disabled={disabled}
               showNepaliNumbers={showNepaliNumbers}
               convertToNepaliNumber={convertToNepaliNumber}
@@ -224,7 +225,7 @@ const Calendar: React.FC<CalendarProps> = ({
       )}
 
       {mode === 'range' && showRangePresets && rangePresetsPosition === 'left' && !renderPresets && (
-        <div style={{ display: 'flex', gap: '16px', flexWrap: 'nowrap', overflow: 'auto' }}>
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'nowrap' }}>
           <RangePresets
             presets={rangePresets}
             calendarType={calendarType}
@@ -232,7 +233,7 @@ const Calendar: React.FC<CalendarProps> = ({
             activePreset={activePreset}
             position="left"
           />
-          <div style={{ flex: '0 0 auto', minWidth: '280px' }}>
+          <div>
             <CalendarHeader
               currentMonth={currentMonth}
               currentYear={currentYear}
@@ -252,7 +253,7 @@ const Calendar: React.FC<CalendarProps> = ({
               isSelected={(day) => isSelected(day, mode)}
               isInRange={isInRange}
               isToday={(day) => showToday && isToday(day)}
-              isDisabled={(day) => isDateDisabled({ year: currentYear, month: currentMonth, day }, minDate, maxDate, calendarType)}
+              isDisabled={(day) => isDateDisabled({ year: currentYear, month: currentMonth, day }, minDate, maxDate)}
               disabled={disabled}
               showNepaliNumbers={showNepaliNumbers}
               convertToNepaliNumber={convertToNepaliNumber}
@@ -261,9 +262,47 @@ const Calendar: React.FC<CalendarProps> = ({
         </div>
       )}
 
-      {(!mode || mode === 'single' || (!showRangePresets && !renderPresets) || rangePresetsPosition === 'top') && (
+      {mode === 'range' && showRangePresets && rangePresetsPosition === 'right' && !renderPresets && (
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'nowrap' }}>
+          <div>
+            <CalendarHeader
+              currentMonth={currentMonth}
+              currentYear={currentYear}
+              months={months}
+              onNavigateMonth={navigateMonth}
+              onYearChange={setCurrentYear}
+              onMonthChange={setCurrentMonth}
+              disabled={disabled}
+              showNepaliNumbers={showNepaliNumbers}
+              convertToNepaliNumber={convertToNepaliNumber}
+              calendarType={calendarType}
+            />
+            <CalendarGrid
+              calendarDays={calendarDays}
+              days={days}
+              onDateSelect={handleDateSelect}
+              isSelected={(day) => isSelected(day, mode)}
+              isInRange={isInRange}
+              isToday={(day) => showToday && isToday(day)}
+              isDisabled={(day) => isDateDisabled({ year: currentYear, month: currentMonth, day }, minDate, maxDate)}
+              disabled={disabled}
+              showNepaliNumbers={showNepaliNumbers}
+              convertToNepaliNumber={convertToNepaliNumber}
+            />
+          </div>
+          <RangePresets
+            presets={rangePresets}
+            calendarType={calendarType}
+            onPresetSelect={handlePresetSelect}
+            activePreset={activePreset}
+            position="right"
+          />
+        </div>
+      )}
+
+      {(!mode || mode === 'single' || (!showRangePresets && !renderPresets) || rangePresetsPosition === 'top' || rangePresetsPosition === 'bottom') && (
         <>
-          {mode === 'range' && showRangePresets && (
+          {mode === 'range' && showRangePresets && rangePresetsPosition === 'top' && (
             <RangePresets
               presets={rangePresets}
               calendarType={calendarType}
@@ -291,11 +330,20 @@ const Calendar: React.FC<CalendarProps> = ({
             isSelected={(day) => isSelected(day, mode)}
             isInRange={isInRange}
             isToday={(day) => showToday && isToday(day)}
-            isDisabled={(day) => isDateDisabled({ year: currentYear, month: currentMonth, day }, minDate, maxDate, calendarType)}
+            isDisabled={(day) => isDateDisabled({ year: currentYear, month: currentMonth, day }, minDate, maxDate)}
             disabled={disabled}
             showNepaliNumbers={showNepaliNumbers}
             convertToNepaliNumber={convertToNepaliNumber}
           />
+          {mode === 'range' && showRangePresets && rangePresetsPosition === 'bottom' && (
+            <RangePresets
+              presets={rangePresets}
+              calendarType={calendarType}
+              onPresetSelect={handlePresetSelect}
+              activePreset={activePreset}
+              position="bottom"
+            />
+          )}
         </>
       )}
     </div>
