@@ -163,9 +163,7 @@ export const parseDate = (dateStr: string): DateInfo | null => {
 export const isDateDisabled = (
   date: DateInfo,
   minDate?: string,
-  maxDate?: string,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  calendarType: 'BS' | 'AD' = 'AD'
+  maxDate?: string
 ): boolean => {
   if (!minDate && !maxDate) return false
 

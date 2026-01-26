@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { CalendarProps, DateInfo } from '../../types/index.js'
+import type { CalendarProps, DateInfo, PredefinedRange, DateRange } from '../../types/index.js'
 import { useCalendar } from '../../hooks/useCalendar'
 import { convertToNepaliNumber, createDateOutput, isDateDisabled } from '../../utils/dateUtils'
 import { createPredefinedRanges } from '../../utils/rangePresets'
@@ -79,7 +79,7 @@ const Calendar: React.FC<CalendarProps> = ({
       setCurrentMonth(range.start.month)
       setActivePreset(preset.key)
       onPresetSelect?.(preset, range)
-      onRangeSelect?.(range)
+      onRangeSelect?.({ start: range.start, end: range.end })
     }
   }
 
