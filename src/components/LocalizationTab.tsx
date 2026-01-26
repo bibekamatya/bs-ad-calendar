@@ -6,10 +6,9 @@ import ExampleCard from './ExampleCard'
 interface LocalizationTabProps {
   outputAD: string
   outputBS: string
-  onADSelect: (data: DateOutput) => void
-  onBSSelect: (data: DateOutput) => void
+  onADSelect: (date: DateOutput) => void
+  onBSSelect: (date: DateOutput) => void
   copied: string | null
-  onToggleCode: (id: string) => void
   onCopyCode: (code: string, id: string) => void
   renderOutput: (output: string) => React.ReactNode
 }
@@ -20,7 +19,6 @@ const LocalizationTab: React.FC<LocalizationTabProps> = ({
   onADSelect,
   onBSSelect,
   copied,
-  onToggleCode,
   onCopyCode,
   renderOutput
 }) => {
@@ -31,12 +29,10 @@ const LocalizationTab: React.FC<LocalizationTabProps> = ({
         code={`<Calendar
   calendarType="AD"
   showNepaliNumbers={true}
-  onDateSelect={(data) => console.log(data)}
+  onDateSelect={(date) => console.log(date)}
 />`}
         codeId="local-ad"
-        showCode="local-ad"
         copied={copied}
-        onToggleCode={onToggleCode}
         onCopyCode={onCopyCode}
         output={renderOutput(outputAD)}
       >
@@ -50,12 +46,10 @@ const LocalizationTab: React.FC<LocalizationTabProps> = ({
   showNepaliMonths={true}
   showNepaliDays={true}
   showNepaliNumbers={true}
-  onDateSelect={(data) => console.log(data)}
+  onDateSelect={(date) => console.log(date)}
 />`}
         codeId="local-bs"
-        showCode="local-bs"
         copied={copied}
-        onToggleCode={onToggleCode}
         onCopyCode={onCopyCode}
         output={renderOutput(outputBS)}
       >

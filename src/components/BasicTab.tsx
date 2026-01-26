@@ -6,10 +6,9 @@ import ExampleCard from './ExampleCard'
 interface BasicTabProps {
   outputAD: string
   outputBS: string
-  onADSelect: (data: DateOutput) => void
-  onBSSelect: (data: DateOutput) => void
+  onADSelect: (date: DateOutput) => void
+  onBSSelect: (date: DateOutput) => void
   copied: string | null
-  onToggleCode: (id: string) => void
   onCopyCode: (code: string, id: string) => void
   renderOutput: (output: string) => React.ReactNode
 }
@@ -20,7 +19,6 @@ const BasicTab: React.FC<BasicTabProps> = ({
   onADSelect,
   onBSSelect,
   copied,
-  onToggleCode,
   onCopyCode,
   renderOutput
 }) => {
@@ -30,12 +28,10 @@ const BasicTab: React.FC<BasicTabProps> = ({
         title="AD Calendar"
         code={`<Calendar
   calendarType="AD"
-  onDateSelect={(data) => console.log(data)}
+  onDateSelect={(date) => console.log(date)}
 />`}
         codeId="basic-ad"
-        showCode="basic-ad"
         copied={copied}
-        onToggleCode={onToggleCode}
         onCopyCode={onCopyCode}
         output={renderOutput(outputAD)}
       >
@@ -46,12 +42,10 @@ const BasicTab: React.FC<BasicTabProps> = ({
         title="BS Calendar"
         code={`<Calendar
   calendarType="BS"
-  onDateSelect={(data) => console.log(data)}
+  onDateSelect={(date) => console.log(date)}
 />`}
         codeId="basic-bs"
-        showCode="basic-bs"
         copied={copied}
-        onToggleCode={onToggleCode}
         onCopyCode={onCopyCode}
         output={renderOutput(outputBS)}
       >

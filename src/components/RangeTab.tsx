@@ -9,7 +9,6 @@ interface RangeTabProps {
   onADSelect: (range: DateRange) => void
   onBSSelect: (range: DateRange) => void
   copied: string | null
-  onToggleCode: (id: string) => void
   onCopyCode: (code: string, id: string) => void
   renderRangeOutput: (output: string) => React.ReactNode
 }
@@ -20,7 +19,6 @@ const RangeTab: React.FC<RangeTabProps> = ({
   onADSelect,
   onBSSelect,
   copied,
-  onToggleCode,
   onCopyCode,
   renderRangeOutput
 }) => {
@@ -36,9 +34,7 @@ const RangeTab: React.FC<RangeTabProps> = ({
   onRangeSelect={(range) => console.log(range)}
 />`}
         codeId="range-basic"
-        showCode="range-basic"
         copied={copied}
-        onToggleCode={onToggleCode}
         onCopyCode={onCopyCode}
         output={renderRangeOutput(outputAD)}
       >
@@ -73,9 +69,7 @@ const RangeTab: React.FC<RangeTabProps> = ({
   onRangeSelect={(range) => console.log(range)}
 />`}
         codeId="range-custom"
-        showCode="range-custom"
         copied={copied}
-        onToggleCode={onToggleCode}
         onCopyCode={onCopyCode}
         output={renderRangeOutput(outputBS)}
       >
