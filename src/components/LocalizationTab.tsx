@@ -8,6 +8,9 @@ interface LocalizationTabProps {
   outputBS: string
   onADSelect: (data: DateOutput) => void
   onBSSelect: (data: DateOutput) => void
+  copied: string | null
+  onToggleCode: (id: string) => void
+  onCopyCode: (code: string, id: string) => void
   renderOutput: (output: string) => React.ReactNode
 }
 
@@ -16,12 +19,25 @@ const LocalizationTab: React.FC<LocalizationTabProps> = ({
   outputBS,
   onADSelect,
   onBSSelect,
+  copied,
+  onToggleCode,
+  onCopyCode,
   renderOutput
 }) => {
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))', gap: '20px', justifyContent: 'center', maxWidth: '1400px', margin: '0 auto' }}>
       <ExampleCard
         title="AD - Nepali Numbers"
+        code={`<Calendar
+  calendarType="AD"
+  showNepaliNumbers={true}
+  onDateSelect={(data) => console.log(data)}
+/>`}
+        codeId="local-ad"
+        showCode="local-ad"
+        copied={copied}
+        onToggleCode={onToggleCode}
+        onCopyCode={onCopyCode}
         output={renderOutput(outputAD)}
       >
         <Calendar calendarType="AD" showNepaliNumbers={true} onDateSelect={onADSelect} />
@@ -29,6 +45,18 @@ const LocalizationTab: React.FC<LocalizationTabProps> = ({
 
       <ExampleCard
         title="BS - Full Nepali"
+        code={`<Calendar
+  calendarType="BS"
+  showNepaliMonths={true}
+  showNepaliDays={true}
+  showNepaliNumbers={true}
+  onDateSelect={(data) => console.log(data)}
+/>`}
+        codeId="local-bs"
+        showCode="local-bs"
+        copied={copied}
+        onToggleCode={onToggleCode}
+        onCopyCode={onCopyCode}
         output={renderOutput(outputBS)}
       >
         <Calendar calendarType="BS" showNepaliMonths={true} showNepaliDays={true} showNepaliNumbers={true} onDateSelect={onBSSelect} />
