@@ -5,18 +5,12 @@ import type { DateOutput } from '../types'
 interface CustomizationTabProps {
   outputAD: string
   onADSelect: (data: DateOutput) => void
-  copied: string | null
-  onToggleCode: (id: string) => void
-  onCopyCode: (code: string, id: string) => void
   renderOutput: (output: string) => React.ReactNode
 }
 
 const CustomizationTab: React.FC<CustomizationTabProps> = ({
   outputAD,
   onADSelect,
-  copied,
-  onToggleCode,
-  onCopyCode,
   renderOutput
 }) => {
   const [colors, setColors] = useState({
@@ -80,54 +74,6 @@ const CustomizationTab: React.FC<CustomizationTabProps> = ({
         </div>
 
         {renderOutput(outputAD)}
-
-        <button 
-          onClick={() => onToggleCode('custom-live')} 
-          style={{ 
-            marginTop: '10px', 
-            padding: '6px 12px', 
-            fontSize: '12px', 
-            cursor: 'pointer', 
-            borderRadius: '4px', 
-            border: '1px solid #e5e7eb', 
-            background: 'white', 
-            color: '#111827' 
-          }}
-        >
-          Hide Code
-        </button>
-
-        {true && (
-          <div style={{ position: 'relative', marginTop: '15px' }}>
-            <pre style={{ 
-              background: '#1f2937', 
-              color: '#f9fafb', 
-              padding: '15px', 
-              borderRadius: '4px', 
-              fontSize: '13px', 
-              overflow: 'auto' 
-            }}>
-              {code}
-            </pre>
-            <button 
-              onClick={() => onCopyCode(code, 'custom-live')} 
-              style={{ 
-                position: 'absolute', 
-                top: '15px', 
-                right: '15px', 
-                padding: '6px 12px', 
-                fontSize: '12px', 
-                cursor: 'pointer', 
-                borderRadius: '4px', 
-                border: '1px solid #374151', 
-                background: '#111827', 
-                color: '#f9fafb' 
-              }}
-            >
-              {copied === 'custom-live' ? '✓ Copied' : 'Copy'}
-            </button>
-          </div>
-        )}
       </div>
     </div>
   )
