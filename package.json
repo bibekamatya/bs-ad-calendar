@@ -4,13 +4,15 @@
   "private": false,
   "description": "A modern React calendar component supporting both Bikram Sambat (BS) and Gregorian (AD) calendars",
   "type": "module",
-  "main": "./dist/bs-ad-calendar.umd.cjs",
+  "main": "./dist/bs-ad-calendar.js",
   "module": "./dist/bs-ad-calendar.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "browser": "./dist/bs-ad-calendar.js",
       "import": "./dist/bs-ad-calendar.js",
-      "require": "./dist/bs-ad-calendar.umd.cjs"
+      "require": "./dist/bs-ad-calendar.umd.cjs",
+      "default": "./dist/bs-ad-calendar.js"
     }
   },
   "files": [
