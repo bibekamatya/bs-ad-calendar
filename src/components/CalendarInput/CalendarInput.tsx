@@ -1,10 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react'
+import NepaliDate from 'nepali-datetime'
 import Calendar from '../Calendar'
 import type { DateOutput, CalendarProps } from '../../types'
 
 interface CalendarInputProps extends Omit<CalendarProps, 'onDateSelect'> {
   placeholder?: string
   format?: string
+  defaultValue?: string // AD ISO date string YYYY-MM-DD
   onDateSelect?: (date: DateOutput) => void
   inputClassName?: string
   popupClassName?: string
@@ -17,6 +19,7 @@ interface CalendarInputProps extends Omit<CalendarProps, 'onDateSelect'> {
 const CalendarInput: React.FC<CalendarInputProps> = ({
   placeholder = 'Select date',
   format = 'YYYY-MM-DD',
+  defaultValue,
   onDateSelect,
   inputClassName = '',
   popupClassName = '',
@@ -29,7 +32,17 @@ const CalendarInput: React.FC<CalendarInputProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState<DateOutput | null>(null)
-  const [inputValue, setInputValue] = useState('')
+  const [inputValue, setInputValue] = useState(() => {
+    if (!defaultValue) return ''
+    if (calendarType === 'BS') {
+      try {
+        const [y, m, d] = defaultValue.split('-').map(Number)
+        const bs = NepaliDate.fromEnglishDate(y, m - 1, d)
+        return `${bs.getYear()}-${String(bs.getMonth() + 1).padStart(2, '0')}-${String(bs.getDate()).padStart(2, '0')}`
+      } catch { return defaultValue }
+    }
+    return defaultValue
+  })
   const containerRef = useRef<HTMLDivElement>(null)
   const popupRef = useRef<HTMLDivElement>(null)
   const [popupPos, setPopupPos] = useState<React.CSSProperties>({ visibility: 'hidden' })
