@@ -31,9 +31,23 @@ const CalendarInputTab: React.FC<CalendarInputTabProps> = ({ isDark = false, out
     fontWeight: 600
   }
 
-  const bsCode = `<DatePicker\n  calendarType="BS"\n  placeholder="Select BS date"\n  defaultValue="${today}"\n  onDateSelect={(date) => console.log(date)}\n/>`
+  const bsCode = `const today = new Date().toISOString().split('T')[0]
 
-  const adCode = `<DatePicker\n  calendarType="AD"\n  placeholder="Select AD date"\n  defaultValue="${today}"\n  onDateSelect={(date) => console.log(date)}\n/>`
+<DatePicker
+  calendarType="BS"
+  placeholder="Select BS date"
+  defaultValue={today}
+  onDateSelect={(date) => console.log(date)}
+/>`
+
+  const adCode = `const today = new Date().toISOString().split('T')[0]
+
+<DatePicker
+  calendarType="AD"
+  placeholder="Select AD date"
+  defaultValue={today}
+  onDateSelect={(date) => console.log(date)}
+/>`
 
   const codeStyle: React.CSSProperties = { background: '#0f172a', color: '#e2e8f0', padding: '12px', borderRadius: '6px', fontSize: '12px', overflow: 'auto', margin: 0, border: '1px solid #1e293b' }
   const copyBtnStyle: React.CSSProperties = { position: 'absolute', top: '8px', right: '8px', padding: '3px 8px', fontSize: '11px', cursor: 'pointer', borderRadius: '4px', border: '1px solid #334155', background: '#1e293b', color: '#94a3b8' }
