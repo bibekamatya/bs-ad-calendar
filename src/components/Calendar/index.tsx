@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import type { CalendarProps, DateInfo, PredefinedRange, DateRange } from '../../types/index.js'
+import type { CalendarProps, DateInfo, PredefinedRange, DateRange, DateRangeOutput } from '../../types/index.js'
 import { useCalendar } from '../../hooks/useCalendar'
 import { convertToNepaliNumber, createDateOutput, isDateDisabled } from '../../utils/dateUtils'
 import { createPredefinedRanges } from '../../utils/rangePresets'
@@ -13,8 +13,6 @@ import {
 import CalendarHeader from './CalendarHeader'
 import CalendarGrid from './CalendarGrid'
 import RangePresets from './RangePresets'
-import styles from './Calendar.module.css'
-
 const Calendar: React.FC<CalendarProps> = ({
   calendarType = 'AD',
   value: _value,
@@ -61,6 +59,11 @@ const Calendar: React.FC<CalendarProps> = ({
   const [activePreset, setActivePreset] = useState<string | undefined>()
   const rangePresets = predefinedRanges || createPredefinedRanges(presetKeys, presetLabels)
 
+  const toRangeOutput = (start: DateInfo, end: DateInfo): DateRangeOutput => ({
+    start: createDateOutput(calendarType, start.year, start.month, start.day, months),
+    end: createDateOutput(calendarType, end.year, end.month, end.day, months)
+  })
+
   // Get localized strings
   const months =
     calendarType === 'BS' && showNepaliMonths
@@ -79,7 +82,7 @@ const Calendar: React.FC<CalendarProps> = ({
       setCurrentMonth(range.start.month)
       setActivePreset(preset.key)
       onPresetSelect?.(preset, range)
-      onRangeSelect?.({ start: range.start, end: range.end })
+      onRangeSelect?.(toRangeOutput(range.start, range.end))
     }
   }
 
@@ -87,7 +90,7 @@ const Calendar: React.FC<CalendarProps> = ({
     setRangeStart(start)
     setRangeEnd(end)
     setActivePreset(undefined)
-    onRangeSelect?.({ start, end })
+    onRangeSelect?.(toRangeOutput(start, end))
   }
 
   const handleDateSelect = (day: number) => {
@@ -110,10 +113,10 @@ const Calendar: React.FC<CalendarProps> = ({
         if (endTimestamp < startTimestamp) {
           setRangeStart(newDate)
           setRangeEnd(rangeStart)
-          onRangeSelect?.({ start: newDate, end: rangeStart })
+          onRangeSelect?.(toRangeOutput(newDate, rangeStart))
         } else {
           setRangeEnd(newDate)
-          onRangeSelect?.({ start: rangeStart, end: newDate })
+          onRangeSelect?.(toRangeOutput(rangeStart, newDate))
         }
       }
       return
@@ -188,7 +191,7 @@ const Calendar: React.FC<CalendarProps> = ({
 
   return (
     <div
-      className={`${styles.calendar} ${className}`}
+      className={`bsac-calendar ${className}`}
       style={calendarStyle}
       data-theme={theme}
       onKeyDown={handleKeyDown}

@@ -1,13 +1,13 @@
 import React from 'react'
 import { Calendar, PRESET_KEYS } from '../index'
-import type { DateRange } from '../types'
+import type { DateRangeOutput } from '../types'
 import ExampleCard from './ExampleCard'
 
 interface RangeTabProps {
   outputAD: string
   outputBS: string
-  onADSelect: (range: DateRange) => void
-  onBSSelect: (range: DateRange) => void
+  onADSelect: (range: DateRangeOutput) => void
+  onBSSelect: (range: DateRangeOutput) => void
   copied: string | null
   onCopyCode: (code: string, id: string) => void
   renderRangeOutput: (output: string) => React.ReactNode

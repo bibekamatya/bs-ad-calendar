@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { DateOutput, DateRange } from './types'
+import type { DateOutput, DateRangeOutput } from './types'
 import BasicTab from './components/BasicTab'
 import LocalizationTab from './components/LocalizationTab'
 import RangeTab from './components/RangeTab'
@@ -20,7 +20,7 @@ function App() {
     setOutputs(prev => ({ ...prev, [key]: JSON.stringify(date) }))
   }
 
-  const handleRangeOutput = (key: string, range: DateRange) => {
+  const handleRangeOutput = (key: string, range: DateRangeOutput) => {
     setOutputs(prev => ({ ...prev, [key]: JSON.stringify(range) }))
   }
 
@@ -73,15 +73,10 @@ function App() {
           color: '#111827'
         }}
       >
-        <div>
-          <strong>Start:</strong> {range.start?.year}-
-          {String(range.start?.month + 1).padStart(2, '0')}-
-          {String(range.start?.day).padStart(2, '0')}
-        </div>
-        <div>
-          <strong>End:</strong> {range.end?.year}-{String(range.end?.month + 1).padStart(2, '0')}-
-          {String(range.end?.day).padStart(2, '0')}
-        </div>
+        <div><strong>Start BS:</strong> {range.start?.bs}</div>
+        <div><strong>Start AD:</strong> {range.start?.ad}</div>
+        <div style={{ marginTop: '6px' }}><strong>End BS:</strong> {range.end?.bs}</div>
+        <div><strong>End AD:</strong> {range.end?.ad}</div>
       </div>
     )
   }

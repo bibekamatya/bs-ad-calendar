@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import type { CalendarHeaderProps } from '../../types/index.js'
 import MonthYearPicker from './MonthYearPicker'
-import styles from './Calendar.module.css'
 
 interface ExtendedCalendarHeaderProps extends CalendarHeaderProps {
   onYearChange: (year: number) => void
@@ -24,45 +23,14 @@ const CalendarHeader: React.FC<ExtendedCalendarHeaderProps> = ({
   const [showPicker, setShowPicker] = useState(false)
 
   return (
-    <div className={styles.header}>
-      <button
-        className={styles.navButton}
-        onClick={() => onNavigateMonth(-12)}
-        disabled={disabled}
-        aria-label="Previous year"
-        title="Previous year"
-      >
-        «
+    <div className="bsac-header">
+      <button className="bsac-nav-btn" onClick={() => onNavigateMonth(-12)} disabled={disabled} aria-label="Previous year">«</button>
+      <button className="bsac-nav-btn" onClick={() => onNavigateMonth(-1)} disabled={disabled} aria-label="Previous month">‹</button>
+      <button className="bsac-month-year-btn" onClick={() => setShowPicker(true)} disabled={disabled}>
+        {months[currentMonth]} {showNepaliNumbers ? convertToNepaliNumber(currentYear) : currentYear}
       </button>
-      <button
-        className={styles.navButton}
-        onClick={() => onNavigateMonth(-1)}
-        disabled={disabled}
-        aria-label="Previous month"
-      >
-        ‹
-      </button>
-      <button className={styles.monthYear} onClick={() => setShowPicker(true)} disabled={disabled}>
-        {months[currentMonth]}{' '}
-        {showNepaliNumbers ? convertToNepaliNumber(currentYear) : currentYear}
-      </button>
-      <button
-        className={styles.navButton}
-        onClick={() => onNavigateMonth(1)}
-        disabled={disabled}
-        aria-label="Next month"
-      >
-        ›
-      </button>
-      <button
-        className={styles.navButton}
-        onClick={() => onNavigateMonth(12)}
-        disabled={disabled}
-        aria-label="Next year"
-        title="Next year"
-      >
-        »
-      </button>
+      <button className="bsac-nav-btn" onClick={() => onNavigateMonth(1)} disabled={disabled} aria-label="Next month">›</button>
+      <button className="bsac-nav-btn" onClick={() => onNavigateMonth(12)} disabled={disabled} aria-label="Next year">»</button>
 
       {showPicker && (
         <MonthYearPicker

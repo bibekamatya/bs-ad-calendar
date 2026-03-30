@@ -1,6 +1,6 @@
 {
   "name": "bs-ad-calendar-react",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "private": false,
   "description": "A modern React calendar component supporting both Bikram Sambat (BS) and Gregorian (AD) calendars",
   "type": "module",
@@ -9,6 +9,7 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "browser": "./dist/bs-ad-calendar.js",
       "import": "./dist/bs-ad-calendar.js",
       "require": "./dist/bs-ad-calendar.umd.cjs",
@@ -72,6 +73,7 @@
     "react-dom": "^18.0.0",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4"
+    "vite": "^7.2.4",
+    "vite-plugin-lib-inject-css": "^2.2.2"
   }
 }

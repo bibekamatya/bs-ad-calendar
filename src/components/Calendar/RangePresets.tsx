@@ -22,37 +22,12 @@ const RangePresets: React.FC<RangePresetsProps> = ({
   }
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: position === 'left' || position === 'right' ? 'column' : 'row',
-        flexWrap: position === 'top' || position === 'bottom' ? 'wrap' : 'nowrap',
-        gap: '8px',
-        marginBottom: position === 'top' ? '16px' : 0,
-        marginTop: position === 'bottom' ? '16px' : 0,
-        padding: '12px',
-        backgroundColor: '#f8f9fa',
-        borderRadius: '6px',
-        border: '1px solid #e9ecef',
-        minWidth: position === 'left' || position === 'right' ? '150px' : 'auto',
-        maxWidth: position === 'left' || position === 'right' ? '180px' : 'none',
-        flexShrink: 0
-      }}
-    >
+    <div className={`bsac-presets bsac-presets--${position}`}>
       {presets.map(preset => (
         <button
           key={preset.key}
           onClick={() => handlePresetClick(preset)}
-          style={{
-            padding: '6px 12px',
-            fontSize: '12px',
-            border: '1px solid #dee2e6',
-            borderRadius: '4px',
-            backgroundColor: activePreset === preset.key ? '#007bff' : '#ffffff',
-            color: activePreset === preset.key ? '#ffffff' : '#495057',
-            cursor: 'pointer',
-            transition: 'all 0.2s'
-          }}
+          className={`bsac-preset-btn${activePreset === preset.key ? ' bsac-preset-btn--active' : ''}`}
         >
           {preset.label}
         </button>
