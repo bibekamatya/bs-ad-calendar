@@ -24,6 +24,11 @@ export type PredefinedRange = {
   key: string
 }
 
+export type DateRangeOutput = {
+  start: DateOutput
+  end: DateOutput
+}
+
 export type CalendarProps = {
   calendarType?: 'BS' | 'AD'
   value?: string
@@ -31,7 +36,7 @@ export type CalendarProps = {
   mode?: 'single' | 'range'
   outputFormat?: 'iso' | 'object' | 'both'
   onDateSelect?: (data: DateOutput) => void
-  onRangeSelect?: (range: { start: DateInfo; end: DateInfo }) => void
+  onRangeSelect?: (range: DateRangeOutput) => void
   showRangePresets?: boolean
   rangePresetsPosition?: 'top' | 'right' | 'bottom' | 'left'
   predefinedRanges?: PredefinedRange[]

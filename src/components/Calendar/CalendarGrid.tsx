@@ -1,6 +1,5 @@
 import React from 'react'
 import type { CalendarGridProps } from '../../types/index.js'
-import styles from './Calendar.module.css'
 
 const CalendarGrid: React.FC<CalendarGridProps> = ({
   calendarDays,
@@ -15,33 +14,29 @@ const CalendarGrid: React.FC<CalendarGridProps> = ({
   convertToNepaliNumber
 }) => {
   return (
-    <div className={styles.grid}>
-      {/* Day headers */}
+    <div className="bsac-grid">
       {days.map(day => (
-        <div key={day} className={styles.dayHeader}>
-          {day}
-        </div>
+        <div key={day} className="bsac-day-header">{day}</div>
       ))}
-
-      {/* Calendar days */}
       {calendarDays.map((day, index) => {
         const dayDisabled = day ? isDisabled?.(day) || disabled : false
+        const selected = day ? isSelected(day) : false
+        const inRange = day ? isInRange(day) : false
+        const today = day ? isToday(day) : false
+
+        const cls = [
+          'bsac-day',
+          !day ? 'bsac-day-empty' :
+          dayDisabled ? 'bsac-day-disabled' :
+          selected ? 'bsac-day-selected' :
+          inRange ? 'bsac-day-in-range' :
+          today ? 'bsac-day-today' : ''
+        ].filter(Boolean).join(' ')
+
         return (
           <div
             key={index}
-            className={`${styles.day} ${
-              day === null
-                ? styles.dayOtherMonth
-                : dayDisabled
-                  ? styles.dayDisabled
-                  : isSelected(day)
-                    ? styles.daySelected
-                    : isInRange(day)
-                      ? styles.dayInRange
-                      : isToday(day)
-                        ? styles.dayToday
-                        : ''
-            }`}
+            className={cls}
             onClick={() => day && !dayDisabled && onDateSelect(day)}
           >
             {day ? (showNepaliNumbers ? convertToNepaliNumber(day) : day) : ''}

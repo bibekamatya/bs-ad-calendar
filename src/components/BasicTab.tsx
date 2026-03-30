@@ -13,51 +13,13 @@ interface BasicTabProps {
   renderOutput: (output: string) => React.ReactNode
 }
 
-const BasicTab: React.FC<BasicTabProps> = ({
-  outputAD,
-  outputBS,
-  onADSelect,
-  onBSSelect,
-  copied,
-  onCopyCode,
-  renderOutput
-}) => {
+const BasicTab: React.FC<BasicTabProps> = ({ outputAD, outputBS, onADSelect, onBSSelect, copied, onCopyCode, renderOutput }) => {
   return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))',
-        gap: '20px',
-        justifyContent: 'center',
-        maxWidth: '1400px',
-        margin: '0 auto'
-      }}
-    >
-      <ExampleCard
-        title="BS Calendar"
-        code={`<Calendar
-  calendarType="BS"
-  onDateSelect={(date) => console.log(date)}
-/>`}
-        codeId="basic-bs"
-        copied={copied}
-        onCopyCode={onCopyCode}
-        output={renderOutput(outputBS)}
-      >
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 400px))', gap: '20px', justifyContent: 'center' }}>
+      <ExampleCard title="BS Calendar" code={`<Calendar\n  calendarType="BS"\n  onDateSelect={(date) => console.log(date)}\n/>`} codeId="basic-bs" copied={copied} onCopyCode={onCopyCode} output={renderOutput(outputBS)}>
         <Calendar calendarType="BS" onDateSelect={onBSSelect} />
       </ExampleCard>
-
-      <ExampleCard
-        title="AD Calendar"
-        code={`<Calendar
-  calendarType="AD"
-  onDateSelect={(date) => console.log(date)}
-/>`}
-        codeId="basic-ad"
-        copied={copied}
-        onCopyCode={onCopyCode}
-        output={renderOutput(outputAD)}
-      >
+      <ExampleCard title="AD Calendar" code={`<Calendar\n  calendarType="AD"\n  onDateSelect={(date) => console.log(date)}\n/>`} codeId="basic-ad" copied={copied} onCopyCode={onCopyCode} output={renderOutput(outputAD)}>
         <Calendar calendarType="AD" onDateSelect={onADSelect} />
       </ExampleCard>
     </div>

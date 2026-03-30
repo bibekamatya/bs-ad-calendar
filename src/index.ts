@@ -1,3 +1,6 @@
+// Styles
+import './styles.css'
+
 // Main component
 export { default as Calendar } from './components/Calendar'
 export { default as CalendarInput } from './components/CalendarInput'
@@ -9,6 +12,7 @@ export { default as DatePicker } from './components/CalendarInput'
 export type {
   DateInfo,
   DateRange,
+  DateRangeOutput,
   DateOutput,
   PredefinedRange,
   CalendarProps,

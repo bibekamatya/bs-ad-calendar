@@ -19,18 +19,20 @@ export default defineConfig(({ mode }) => {
     plugins: [react()],
     build: {
       outDir: 'dist',
-      emptyOutDir: true,
+      emptyOutDir: false,
       lib: {
         entry: 'src/index.ts',
         name: 'BSADCalendar',
         fileName: 'bs-ad-calendar'
       },
       rollupOptions: {
-        external: ['react', 'react-dom'],
+        external: ['react', 'react-dom', 'react/jsx-runtime', 'react/jsx-dev-runtime'],
         output: {
           globals: {
             react: 'React',
-            'react-dom': 'ReactDOM'
+            'react-dom': 'ReactDOM',
+            'react/jsx-runtime': 'ReactJSXRuntime',
+            'react/jsx-dev-runtime': 'ReactJSXDevRuntime'
           }
         }
       }
