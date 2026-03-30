@@ -1,13 +1,9 @@
 import React, { useState } from 'react'
-import { Calendar, DatePicker, PRESET_KEYS } from '../index'
-import type { DateOutput } from '../types'
+import { Calendar, PRESET_KEYS } from '../index'
 
 interface CustomizationTabProps {
-  outputAD: string
-  onADSelect: (date: DateOutput) => void
   copied: string | null
   onCopyCode: (code: string, id: string) => void
-  renderOutput: (output: string) => React.ReactNode
 }
 
 interface ColorConfig {
@@ -68,7 +64,7 @@ const SectionTitle = ({ children }: { children: string }) => (
   <p style={{ fontSize: '11px', fontWeight: 600, color: '#3b82f6', margin: '0 0 6px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>{children}</p>
 )
 
-const CustomizationTab: React.FC<CustomizationTabProps> = ({ outputAD, onADSelect, copied, onCopyCode, renderOutput }) => {
+const CustomizationTab: React.FC<CustomizationTabProps> = ({ copied, onCopyCode }) => {
   const [colors, setColors] = useState<ColorConfig>(DEFAULTS)
   const handleChange = (key: keyof ColorConfig, val: string) => setColors(prev => ({ ...prev, [key]: val }))
 
@@ -93,9 +89,9 @@ const CustomizationTab: React.FC<CustomizationTabProps> = ({ outputAD, onADSelec
 />`
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '24px' }}>
       {/* Left: controls */}
-      <div>
+      <div style={{ maxHeight: '80vh', overflowY: 'auto' }}>
         <h3 style={{ color: '#111827', fontSize: '16px', fontWeight: 600, marginTop: 0, marginBottom: '16px' }}>Live Color Customization</h3>
 
         <div style={{ border: '1px solid #e5e7eb', borderRadius: '8px', padding: '12px', marginBottom: '10px' }}>
@@ -131,12 +127,8 @@ const CustomizationTab: React.FC<CustomizationTabProps> = ({ outputAD, onADSelec
         <div style={cssVars as React.CSSProperties}>
           <Calendar calendarType="BS" mode="range" showRangePresets rangePresetsPosition="top"
             presetKeys={[PRESET_KEYS.THIS_MONTH, PRESET_KEYS.LAST_MONTH, PRESET_KEYS.LAST_7_DAYS]}
-            onDateSelect={onADSelect} />
-          <div style={{ marginTop: '12px' }}>
-            <DatePicker calendarType="BS" placeholder="Select date" onDateSelect={onADSelect} />
-          </div>
+            onRangeSelect={() => {}} />
         </div>
-        {renderOutput(outputAD)}
         <div style={{ position: 'relative', marginTop: '12px' }}>
           <pre style={{ background: '#1f2937', color: '#f9fafb', padding: '12px', borderRadius: '4px', fontSize: '11px', overflow: 'auto', margin: 0 }}>{code}</pre>
           <button onClick={() => onCopyCode(code, 'custom-live')}

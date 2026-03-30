@@ -97,7 +97,7 @@ function App() {
               <RangeTab outputAD={outputs.ad3 || ''} outputBS={outputs.bs3 || ''} onADSelect={range => handleRangeOutput('ad3', range)} onBSSelect={range => handleRangeOutput('bs3', range)} copied={copied} onCopyCode={copyCode} renderRangeOutput={renderRangeOutput} />
             )}
             {activeTab === 'customization' && (
-              <CustomizationTab outputAD={outputs.ad5 || ''} onADSelect={date => handleOutput('ad5', date)} copied={copied} onCopyCode={copyCode} renderOutput={renderOutput} />
+              <CustomizationTab copied={copied} onCopyCode={copyCode} />
             )}
             {activeTab === 'calendarinput' && (
               <CalendarInputTab outputAD={outputs.ad6 || ''} outputBS={outputs.bs6 || ''} onADSelect={date => handleOutput('ad6', date)} onBSSelect={date => handleOutput('bs6', date)} copied={copied} onCopyCode={copyCode} renderOutput={renderOutput} />
