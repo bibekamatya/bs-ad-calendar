@@ -132,6 +132,8 @@ const CalendarInput: React.FC<CalendarInputProps> = ({
         }
       }
       setSelectedDate(parsedDate)
+      // only fire onDateSelect if user actually typed (not on initial blur)
+      if (selectedDate === null) return
       onDateSelect?.(parsedDate)
     } else if (value.length < 10) {
       setInputValue(selectedDate ? (calendarType === 'BS' ? selectedDate.bs : selectedDate.ad) : '')

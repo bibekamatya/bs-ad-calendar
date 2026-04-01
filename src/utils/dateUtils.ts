@@ -74,12 +74,10 @@ export const createDateOutput = (
   if (calendarType === 'BS') {
     try {
       const bsDate = new NepaliDate(year, month, day)
-      const adDate = new Date(
-        bsDate.getEnglishYear(),
-        bsDate.getEnglishMonth(),
-        bsDate.getEnglishDate()
-      )
-      const isoDate = adDate.toISOString().split('T')[0]
+      const ey = bsDate.getEnglishYear()
+      const em = bsDate.getEnglishMonth()
+      const ed = bsDate.getEnglishDate()
+      const isoDate = `${ey}-${String(em + 1).padStart(2, '0')}-${String(ed).padStart(2, '0')}`
       const bsDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
 
       return {
@@ -87,11 +85,7 @@ export const createDateOutput = (
         ad: isoDate,
         formatted: {
           bs: `${months[month]} ${day}, ${year}`,
-          ad: new Date(
-            bsDate.getEnglishYear(),
-            bsDate.getEnglishMonth(),
-            bsDate.getEnglishDate()
-          ).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+          ad: new Date(ey, em, ed).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
         }
       }
     } catch {
@@ -106,8 +100,8 @@ export const createDateOutput = (
       }
     }
   } else {
-    const adDate = new Date(year, month, day)
-    const isoDate = adDate.toISOString().split('T')[0]
+    const isoDate = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`
+    const adDateFormatted = new Date(year, month, day)
 
     try {
       const bsDate = NepaliDate.fromEnglishDate(year, month, day)
@@ -117,7 +111,7 @@ export const createDateOutput = (
         ad: isoDate,
         bs: bsDateStr,
         formatted: {
-          ad: adDate.toLocaleDateString('en-US', {
+          ad: adDateFormatted.toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
@@ -130,12 +124,12 @@ export const createDateOutput = (
         ad: isoDate,
         bs: isoDate,
         formatted: {
-          ad: adDate.toLocaleDateString('en-US', {
+          ad: adDateFormatted.toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
           }),
-          bs: adDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
+          bs: adDateFormatted.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })
         }
       }
     }
