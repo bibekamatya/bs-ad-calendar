@@ -79,6 +79,7 @@
 /* ── Calendar ─────────────────────────────────────────── */
 
 .bsac-calendar {
+  position: relative;
   background: var(--calendar-background, white);
   border: 1px solid var(--calendar-border, #e5e7eb);
   border-radius: 8px;
@@ -208,6 +209,18 @@
   align-items: center;
   justify-content: center;
   z-index: 10000;
+}
+
+.bsac-picker-inline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--calendar-background, white);
+  border-radius: 8px;
+  z-index: 1;
+  overflow-y: auto;
 }
 
 .bsac-picker-content {

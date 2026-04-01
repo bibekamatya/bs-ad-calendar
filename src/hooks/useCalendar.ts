@@ -1,21 +1,29 @@
 import { useState, useMemo, useEffect } from 'react'
 import type { DateInfo, CalendarProps } from '../types/index.js'
-import { getTodayDate, getDaysInMonth, getFirstDayOfMonth } from '../utils/dateUtils'
+import { getTodayDate, getDaysInMonth, getFirstDayOfMonth, parseDate } from '../utils/dateUtils'
 
-export const useCalendar = (calendarType: CalendarProps['calendarType'] = 'AD') => {
+export const useCalendar = (calendarType: CalendarProps['calendarType'] = 'AD', initialValue?: string) => {
   const today = useMemo(() => getTodayDate(calendarType), [calendarType])
 
-  const [currentYear, setCurrentYear] = useState(today.year)
-  const [currentMonth, setCurrentMonth] = useState(today.month)
-  const [selectedDate, setSelectedDate] = useState<DateInfo | null>(null)
+  const parsedInitial = useMemo(() => initialValue ? parseDate(initialValue) : null, [initialValue])
+
+  const [currentYear, setCurrentYear] = useState(parsedInitial?.year ?? today.year)
+  const [currentMonth, setCurrentMonth] = useState(parsedInitial?.month ?? today.month)
+  const [selectedDate, setSelectedDate] = useState<DateInfo | null>(parsedInitial)
   const [rangeStart, setRangeStart] = useState<DateInfo | null>(null)
   const [rangeEnd, setRangeEnd] = useState<DateInfo | null>(null)
 
-  // Update calendar when type changes
+  // Only sync calendar position when calendarType changes
   useEffect(() => {
-    setCurrentYear(today.year)
-    setCurrentMonth(today.month)
-  }, [today.year, today.month])
+    const parsed = initialValue ? parseDate(initialValue) : null
+    if (parsed) {
+      setCurrentYear(parsed.year)
+      setCurrentMonth(parsed.month)
+    } else {
+      setCurrentYear(today.year)
+      setCurrentMonth(today.month)
+    }
+  }, [calendarType])
 
   const calendarDays = useMemo(() => {
     const daysInMonth = getDaysInMonth(calendarType, currentYear, currentMonth)
@@ -73,12 +81,13 @@ export const useCalendar = (calendarType: CalendarProps['calendarType'] = 'AD') 
       )
     }
 
-    return !!(
+    const result = !!(
       selectedDate &&
       selectedDate.year === currentYear &&
       selectedDate.month === currentMonth &&
       selectedDate.day === day
     )
+    return result
   }
 
   const isInRange = (day: number): boolean => {

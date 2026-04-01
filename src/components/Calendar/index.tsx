@@ -15,7 +15,7 @@ import CalendarGrid from './CalendarGrid'
 import RangePresets from './RangePresets'
 const Calendar: React.FC<CalendarProps> = ({
   calendarType = 'AD',
-  value: _value,
+  value,
   onChange,
   className = '',
   showToday = true,
@@ -54,7 +54,7 @@ const Calendar: React.FC<CalendarProps> = ({
     isToday,
     isSelected,
     isInRange
-  } = useCalendar(calendarType)
+  } = useCalendar(calendarType, value)
 
   const [activePreset, setActivePreset] = useState<string | undefined>()
   const rangePresets = predefinedRanges || createPredefinedRanges(presetKeys, presetLabels)
@@ -95,12 +95,8 @@ const Calendar: React.FC<CalendarProps> = ({
 
   const handleDateSelect = (day: number) => {
     if (disabled) return
-
     const newDate = { year: currentYear, month: currentMonth, day }
-
-    // Check if date is disabled by min/max constraints
     if (isDateDisabled(newDate, minDate, maxDate)) return
-
     if (mode === 'range') {
       setActivePreset(undefined) // Clear preset when manually selecting
       if (!rangeStart || (rangeStart && rangeEnd)) {

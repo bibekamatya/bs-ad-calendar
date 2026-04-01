@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useState, useRef, useEffect, useMemo } from 'react'
 import NepaliDate from 'nepali-datetime'
 import Calendar from '../Calendar'
 import type { DateOutput, CalendarProps } from '../../types'
@@ -32,6 +32,7 @@ const CalendarInput: React.FC<CalendarInputProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedDate, setSelectedDate] = useState<DateOutput | null>(null)
+  const [selectedCalendarValue, setSelectedCalendarValue] = useState<string | undefined>(undefined)
   const [inputValue, setInputValue] = useState(() => {
     if (!defaultValue) return ''
     if (calendarType === 'BS') {
@@ -43,6 +44,31 @@ const CalendarInput: React.FC<CalendarInputProps> = ({
     }
     return defaultValue
   })
+
+  useEffect(() => {
+    if (!defaultValue) return
+    if (calendarType === 'BS') {
+      try {
+        const [y, m, d] = defaultValue.split('-').map(Number)
+        const bs = NepaliDate.fromEnglishDate(y, m - 1, d)
+        setInputValue(`${bs.getYear()}-${String(bs.getMonth() + 1).padStart(2, '0')}-${String(bs.getDate()).padStart(2, '0')}`)
+      } catch { setInputValue(defaultValue) }
+    } else {
+      setInputValue(defaultValue)
+    }
+  }, [defaultValue, calendarType])
+  // Compute the calendar value (in the correct calendar type format) to pass as initial selected date
+  const calendarValue = useMemo(() => {
+    if (!defaultValue) return undefined
+    if (calendarType === 'BS') {
+      try {
+        const [y, m, d] = defaultValue.split('-').map(Number)
+        const bs = NepaliDate.fromEnglishDate(y, m - 1, d)
+        return `${bs.getYear()}-${String(bs.getMonth() + 1).padStart(2, '0')}-${String(bs.getDate()).padStart(2, '0')}`
+      } catch { return defaultValue }
+    }
+    return defaultValue
+  }, [defaultValue, calendarType])
   const containerRef = useRef<HTMLDivElement>(null)
   const popupRef = useRef<HTMLDivElement>(null)
   const [popupPos, setPopupPos] = useState<React.CSSProperties>({ visibility: 'hidden' })
@@ -91,6 +117,7 @@ const CalendarInput: React.FC<CalendarInputProps> = ({
 
   const handleDateSelect = (date: DateOutput) => {
     setSelectedDate(date)
+    setSelectedCalendarValue(calendarType === 'BS' ? date.bs : date.ad)
     setInputValue(calendarType === 'BS' ? date.bs : date.ad)
     setIsOpen(false)
     onDateSelect?.(date)
@@ -178,11 +205,10 @@ const CalendarInput: React.FC<CalendarInputProps> = ({
         )}
       </button>
 
-      {isOpen && (
-        <div ref={popupRef} className={`bsac-popup ${popupClassName}`} style={popupPos}>
-          <Calendar calendarType={calendarType} onDateSelect={handleDateSelect} {...calendarProps} />
-        </div>
-      )}
+      {/* keep mounted so selectedDate state persists across open/close */}
+      <div ref={popupRef} className={`bsac-popup ${popupClassName}`} style={{ ...popupPos, display: isOpen ? undefined : 'none' }}>
+        <Calendar calendarType={calendarType} onDateSelect={handleDateSelect} value={selectedCalendarValue ?? calendarValue} {...calendarProps} />
+      </div>
     </div>
   )
 }
