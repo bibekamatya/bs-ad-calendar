@@ -1,6 +1,6 @@
 {
   "name": "bs-ad-calendar-react",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "private": false,
   "description": "A modern React calendar component for seamless conversion between Bikram Sambat (BS) and Gregorian (AD) calendars. Supports date picker, range selection, Nepali localization, and dark theme.",
   "type": "module",
